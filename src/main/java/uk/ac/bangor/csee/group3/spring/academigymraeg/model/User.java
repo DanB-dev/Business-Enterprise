@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 public class User implements UserDetails {
 	
-
+//hello
 	private static final long serialVersionUID = -4433946202794942362L;
 	
 	
