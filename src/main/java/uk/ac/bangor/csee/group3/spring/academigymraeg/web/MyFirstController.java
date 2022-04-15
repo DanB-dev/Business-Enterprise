@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MyFirstController {
 	
+	/**
 	@RequestMapping("/welcome")
 	public String welcome(Model model) {
 		model.addAttribute("date", new Date());
@@ -26,4 +27,5 @@ public class MyFirstController {
 	public String secure() {
 		return "secure";
 	}
+	**/
 }
