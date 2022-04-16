@@ -25,5 +25,13 @@ public class RepositoryBasedUserDetailsServiceImpl implements UserDetailsService
 			return u.get();
 		throw new UsernameNotFoundException(username + "not found");
 	}
+	
+	
+	public boolean isUserAlreadyPresent(User user) {
+		if(loadUserByUsername(user.getUsername()) != null)
+			return true;
+		else
+			return false;
+	}
 
 }

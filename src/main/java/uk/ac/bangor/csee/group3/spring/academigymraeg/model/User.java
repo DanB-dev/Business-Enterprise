@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,9 +23,11 @@ public class User implements UserDetails {
 	@Column(nullable = false)
 	private boolean admin = false, user = true, power = false;
 
+	@NotNull(message="Password is required")
 	private String password;
 
 	@Id
+	@NotNull(message="Username is required")
 	private String username;
 
 	@Transient

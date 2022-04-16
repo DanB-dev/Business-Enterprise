@@ -14,6 +14,7 @@
 		<div>
 			<h1>User Registration</h1>
 		</div>
+		<div th:if="${errorUsername}">Username already in use!</div>
 		<form th:action="@{/process_register}" th:object="${user}"
 			method="post" style="max-width: 600px; margin: 0 auto;">
 			<div class="m-3">
