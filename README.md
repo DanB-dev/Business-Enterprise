@@ -1,5 +1,5 @@
 # Business-Enterprise
-Project Created for ICE-2101 Business-Enteprise Semester 2 group Module.
+Project Created for ICE-2101 Business-Enterprise Semester 2 group Module.
 
 
 
@@ -26,7 +26,7 @@ spring.jpa.hibernate.ddl-auto=update #{The Method for our table creation. Needs 
 
 ## Accessing Secured Routes in development.
 
-For the sake of ease the application will generate our first user, which will be given the highest level of access. Since this currently is only intended for local use, this is plenty secure.
+For the sake of ease, the application will generate our first user, which will be given the highest level of access. Since this currently is only intended for local use, this is plenty secure.
 
 The details for admin are:<br>
 Username - `admin` <br>
