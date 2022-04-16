@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Welcome</title>
+</head>
+<body>
+	<h1>Welcome to Academi Gymraeg - Secure</h1>
+	    <div>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Username</th>
+					<th>Admin</th>
+					<th>User</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user: ${listUsers}">
+                    <td th:text="${user.username}">Username</td>
+                    <td th:text="${user.isAdmin}">Is admin</td>
+                    <td th:text="${user.isUser}">Is user</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
