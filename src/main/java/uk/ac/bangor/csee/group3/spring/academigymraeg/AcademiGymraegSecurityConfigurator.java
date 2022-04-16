@@ -24,10 +24,25 @@ public class AcademiGymraegSecurityConfigurator extends WebSecurityConfigurerAda
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/secure").authenticated().anyRequest().permitAll().and().formLogin()
-				.loginPage("/login").defaultSuccessUrl("/secure").permitAll().and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")).and()
-				.userDetailsService(userDetailsService);
+		http.authorizeRequests()
+		.antMatchers("/secure")
+		.hasRole("USER")
+		.antMatchers("/users")
+		.hasRole("ADMIN")
+		.anyRequest()
+		.authenticated()
+		.and()
+		.formLogin()
+		.loginPage("/login")
+		.defaultSuccessUrl("/secure")
+		.permitAll()
+		.and()
+		.logout()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+		.and()
+		.userDetailsService(userDetailsService);
+		
+
 	}
 
 	@Override
