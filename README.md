@@ -28,7 +28,7 @@ spring.jpa.hibernate.ddl-auto=update #{The Method for our table creation. Needs 
 
 For the sake of ease the application will generate our first user, which will be given the highest level of access. Since this currently is only intended for local use, this is plenty secure.
 
-The details for admin are:
+The details for admin are:<br>
 Username - `admin` <br>
 Password - `admin`
 
