@@ -13,31 +13,28 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class AcademiGymraegSecurityConfigurator extends WebSecurityConfigurerAdapter {
 
-
 	@Autowired
 	private RepositoryBasedUserDetailsServiceImpl userDetailsService;
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
 
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests().antMatchers("/welcome").permitAll().and().formLogin().loginPage("/login")
-				.defaultSuccessUrl("/secure").and().logout()
+
+		http.authorizeRequests().antMatchers("/secure").authenticated().anyRequest().permitAll().and().formLogin()
+				.loginPage("/login").defaultSuccessUrl("/secure").permitAll().and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")).and()
 				.userDetailsService(userDetailsService);
 	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 		auth.inMemoryAuthentication().withUser("spring").password(passwordEncoder().encode("secret")).roles("USER");
 
 	}
-	
-	
 
 }
