@@ -4,6 +4,7 @@ Project Created for ICE-2101 Business-Enteprise Semester 2 group Module.
 
 
 ## Adding application.properties
+The Application Will not run without this file being created.
 
 1. Navigate to `/Business-Enterprise/src/main/resources/`.
 2. Create a file named `application.properties`.
