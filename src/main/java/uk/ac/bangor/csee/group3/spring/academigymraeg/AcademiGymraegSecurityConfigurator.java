@@ -29,6 +29,8 @@ public class AcademiGymraegSecurityConfigurator extends WebSecurityConfigurerAda
 		.hasRole("USER")
 		.antMatchers("/users")
 		.hasRole("ADMIN")
+		.antMatchers("/*")
+		.permitAll()
 		.anyRequest()
 		.authenticated()
 		.and()
