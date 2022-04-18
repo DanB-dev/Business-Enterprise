@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+//Test Comment
+
 @Entity
 public class Noun {
 	@Column(nullable = false)
