@@ -13,6 +13,7 @@
                     <th>Username</th>
 					<th>Admin</th>
 					<th>User</th>
+					<th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,9 +21,11 @@
                     <td th:text="${user.username}">Username</td>
                     <td th:text="${user.isAdmin}">Is admin</td>
                     <td th:text="${user.isUser}">Is user</td>
+                    <td><button onclick="alert('hi')" >Delete</button></td>
                 </tr>
             </tbody>
         </table>
+        <button>Add User</button>
     </div>
 </body>
 </html>
