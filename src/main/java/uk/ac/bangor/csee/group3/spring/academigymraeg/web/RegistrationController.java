@@ -17,6 +17,7 @@ import uk.ac.bangor.csee.group3.spring.academigymraeg.repository.UserRepository;
 
 @Controller
 public class RegistrationController {
+	//test pushing
 	
 	@Autowired
 	private UserRepository repository;
