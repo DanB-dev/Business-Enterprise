@@ -28,7 +28,8 @@ public class RepositoryBasedUserDetailsServiceImpl implements UserDetailsService
 	
 	
 	public boolean isUserAlreadyPresent(User user) {
-		if(loadUserByUsername(user.getUsername()) != null)
+		Optional<User> u = repository.findById(user.getUsername());
+		if(u.isPresent())
 			return true;
 		else
 			return false;
