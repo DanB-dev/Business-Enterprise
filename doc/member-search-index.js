@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"uk.ac.bangor.csee.group3.spring.academigymraeg","c":"AcademiGymraegApplication","l":"AcademiGymraegApplication()","u":"%3Cinit%3E()"},{"p":"uk.ac.bangor.csee.group3.spring.academigymraeg","c":"AcademiGymraegApplication","l":"main(String[])","u":"main(java.lang.String[])"}];updateSearchResults();

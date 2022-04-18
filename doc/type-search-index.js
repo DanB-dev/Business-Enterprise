@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"uk.ac.bangor.csee.group3.spring.academigymraeg","l":"AcademiGymraegApplication"},{"l":"All Classes","u":"allclasses-index.html"}];updateSearchResults();
