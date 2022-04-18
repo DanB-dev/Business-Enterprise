@@ -34,5 +34,13 @@ public class RepositoryBasedUserDetailsServiceImpl implements UserDetailsService
 		else
 			return false;
 	}
+	
+	public void deleteUserByUsername(String username) {
+		Optional<User> u = repository.findById(username);
+		
+		if(u.isPresent())
+			repository.deleteById(username);
+		throw new UsernameNotFoundException(username + "not found");
+	}
 
 }
