@@ -48,15 +48,13 @@ public class UserManagementController {
 		User user = (User) userDetailsService.loadUserByUsername(username);
 		model.addAttribute("user", user);
 		
+		
 		return "editUser";
 	}
 	
 	@PostMapping("/saveUser")
 	public String saveUser(@ModelAttribute User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setAdmin(user.isAdmin());
-		user.setPower(user.isPower());
-		user.setUser(user.isUser());
 		repository.save(user);
 		
 		return "redirect:/users";
