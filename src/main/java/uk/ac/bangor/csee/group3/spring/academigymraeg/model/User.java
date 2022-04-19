@@ -74,7 +74,7 @@ public class User implements UserDetails {
 		return true;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		// TODO Auto-generated method stub
 		return true;
 	}
@@ -105,6 +105,12 @@ public class User implements UserDetails {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

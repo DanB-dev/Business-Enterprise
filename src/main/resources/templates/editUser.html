@@ -31,14 +31,10 @@
 				}
 			</script>
 			</br> Admin account: 
-			<select class="form-control" th:text="${user.isAdmin}">
-    			<option th:value="TRUE" >true</option>
-    			<option th:value="FALSE" >false</option>
-				</select> 
+			<input type="checkbox" th:field="*{admin}"/>
 			</br> Instructor account: 
-			<input type="checkbox" name="isPower" th:checked="${user.isPower}" th:value= *{isPower} /> </br> Active account: 
-			<input type="checkbox" name="isUser" th:checked="${user.isUser}" th:value= *{isUser} /> </br>
-			
+			<input type="checkbox" th:field="*{power}"/> </br> Active account: 
+			<input type="checkbox" th:field="*{user}" /> </br>
 			<button type="submit">Save</button>
 		</form>
 

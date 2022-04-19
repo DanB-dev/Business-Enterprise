@@ -12,6 +12,7 @@
 				<tr>
 					<th>Username</th>
 					<th>Admin</th>
+					<th>Instructor</th>
 					<th>User</th>
 					<th>Action</th>
 				</tr>
@@ -20,7 +21,8 @@
 				<tr th:each="user: ${listUsers}">
 					<td th:text="${user.username}">Username</td>
 					<td th:text="${user.isAdmin}">Is admin</td>
-					<td th:text="${user.isUser}">Is user</td>
+					<td th:text="${user.isPower}">Is instructor</td>
+					<td th:text="${user.isUser}">Active account</td>
 					<td><form th:action="@{/deleteUser(user=${user.username})}"
 							 method="post">
 							<button onclick="return confirm('Confirm user deletion')">Delete</button>

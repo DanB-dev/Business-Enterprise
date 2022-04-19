@@ -51,7 +51,7 @@ public class RegistrationController {
 		createUser.setPassword(passwordEncoder.encode(createUser.getPassword()));
 		repository.save(createUser);
 		
-		return "register_success";
+		return "redirect:/users";
 	}
 	
 	@RequestMapping("/register_success")
