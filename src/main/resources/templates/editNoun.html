@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Welcome</title>
+</head>
+<body>
+	<h1>Welcome to Academi Gymraeg - Secure</h1>
+	<div>
+		<form th:action="@{/saveNoun}" th:object="${noun}" method="post">
+			<label>Welsh Noun <input type="text"
+				th:field="*{cyNoun}">
+			</label> <br /> <label>English Noun <input type="text"
+				th:field="*{enNoun}">
+			</label><br /> <label th:for="masc"> Masculine</label> <input type="radio"
+				name="cyGender" value="masculine" th:id="masc" > <br /><label
+				th:for="fem"> Feminine</label> <input type="radio"
+				name="cyGender" value="feminine" th:id="fem"> <br />
+			<button type="submit">Save</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Welcome</title>
+</head>
+<body>
+	<h1>Welcome to Academi Gymraeg - Secure</h1>
+	<div>
+		<table class="table table-striped table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>Username</th>
+					<th>Admin</th>
+					<th>Instructor</th>
+					<th>User</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user: ${listUsers}">
+					<td th:text="${user.username}">Username</td>
+					<td th:text="${user.isAdmin}">Is admin</td>
+					<td th:text="${user.isPower}">Is instructor</td>
+					<td th:text="${user.isUser}">Active account</td>
+					<td>
+						<form th:action="@{/deleteUser(user=${user.username})}"
+							method="post">
+							<button onclick="return confirm('Confirm user deletion')">Delete</button>
+						</form>
+						<form th:action="@{/editUser(username=${user.username})}"
+							method="post">
+							<button type="submit">Edit</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="/register"><button>Add User</button></a>
+	</div>
+</body>
+</html>
