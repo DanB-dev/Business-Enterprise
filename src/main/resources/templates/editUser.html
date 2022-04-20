@@ -9,7 +9,7 @@
 	<div>
 		<form th:action="@{/saveUser}" th:object="${user}" method="post">
 			Username: <input type="text" th:value="${user.username}"
-				th:field="*{username}"> </br> Password: <input type="password"
+				th:field="*{username}"> <br/> Password: <input type="password"
 				th:field="*{password}">
 			<button onclick='genPassword()' type="button">Generate
 				Password</button>
@@ -30,11 +30,11 @@
 					alert("Generated password: " + password);
 				}
 			</script>
-			</br> Admin account: 
+			<br/> Admin account: 
 			<input type="checkbox" th:field="*{admin}"/>
-			</br> Instructor account: 
-			<input type="checkbox" th:field="*{power}"/> </br> Active account: 
-			<input type="checkbox" th:field="*{user}" /> </br>
+			<br/> Instructor account: 
+			<input type="checkbox" th:field="*{power}"/> <br/> Active account: 
+			<input type="checkbox" th:field="*{user}" /> <br/>
 			<button type="submit">Save</button>
 		</form>
 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Nouns List</title>
+</head>
+<body>
+	<h1>Welcome to Academi Gymraeg - Secure</h1>
+	<h2>Nouns List</h2>
+	<table th:if="${listNouns!=null and !listNouns.empty}">
+		<thead>
+			<tr>
+				<th>Welsh</th>
+				<th>English</th>
+				<th>Gender</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="noun: ${listNouns}">
+				<td th:text="${noun.cyNoun}">Welsh</td>
+				<td th:text="${noun.enNoun}">English</td>
+				<td th:text="${noun.cyGender}">Gender</td>
+				<td>
+					<form th:action="@{/editNoun(cyNoun=${noun.cyNoun})}" method="post">
+						<button type="submit">Edit</button>
+					</form>
+					<form th:action="@{/deleteNoun(noun=${noun.cyNoun})}" method="post">
+						<button onclick="return confirm('Confirm noun deletion')">Delete</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!-- This will only show if there are no nouns found. -->
+	<th:block th:if="${listNouns==null or listNouns.empty}">
+		<p>There are no nouns to show... consider adding some now!</p>
+	</th:block>
+	<a href="/createNoun"><button>Add a Noun</button></a>
+</body>
+</html>

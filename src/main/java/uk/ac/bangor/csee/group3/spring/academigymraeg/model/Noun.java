@@ -3,6 +3,7 @@ package uk.ac.bangor.csee.group3.spring.academigymraeg.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 //Test Comment
 
@@ -10,7 +11,10 @@ import javax.persistence.Id;
 public class Noun {
 	@Column(nullable = false)
 	private String cyGender,enNoun;
+	
 	@Id
+	@NotNull(message = "You must enter a noun")
+	@Column(nullable = false)
 	private String cyNoun; // Welsh Noun
 
 	public String getCyGender() {

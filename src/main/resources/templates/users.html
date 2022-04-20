@@ -23,14 +23,16 @@
 					<td th:text="${user.isAdmin}">Is admin</td>
 					<td th:text="${user.isPower}">Is instructor</td>
 					<td th:text="${user.isUser}">Active account</td>
-					<td><form th:action="@{/deleteUser(user=${user.username})}"
-							 method="post">
+					<td>
+						<form th:action="@{/deleteUser(user=${user.username})}"
+							method="post">
 							<button onclick="return confirm('Confirm user deletion')">Delete</button>
-						</form></td>
-					<td><form th:action="@{/editUser(username=${user.username})}"
+						</form>
+						<form th:action="@{/editUser(username=${user.username})}"
 							method="post">
 							<button type="submit">Edit</button>
-						</form></td>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
