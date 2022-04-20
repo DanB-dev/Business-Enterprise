@@ -2,6 +2,8 @@ package uk.ac.bangor.csee.group3.spring.academigymraeg;
 
 import java.util.Random;
 
+import uk.ac.bangor.csee.group3.spring.academigymraeg.model.Question;
+
 public class QuestionConfigurer {
     //Design Flaws:
     //This configurer doesnt call nouns, translations and genders from the already established data fields,
