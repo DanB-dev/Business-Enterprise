@@ -17,13 +17,13 @@
                 <h1>User Login</h1>
             </div>
             <div th:if="${errorUsername}">Username already in use!</div>
-            <form th:action="@{/register}" th:object="${user}"
+            <form th:action="@{/login}"
                 method="post" style="max-width: 600px; margin: 0 auto;">
                 <div class="m-3">
                     <div class="form-group row">
                         <label class="col-4 col-form-label">Username: </label>
                         <div class="col-8">
-                            <input type="text" th:field="*{username}" class="form-control"
+                            <input type="text" name="username" class="form-control"
                                 />
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                     <div class="form-group row">
                         <label class="col-4 col-form-label">Password: </label>
                         <div class="col-8">
-                            <input type="password" th:field="*{password}" class="form-control"
+                            <input type="password" name="password"  class="form-control"
                                 />
                         </div>
                     </div>
