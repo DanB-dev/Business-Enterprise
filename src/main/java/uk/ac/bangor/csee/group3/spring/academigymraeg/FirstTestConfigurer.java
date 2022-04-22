@@ -32,7 +32,7 @@ public class FirstTestConfigurer {
 			testDetails.loadTestById("1");
 		} catch (TestNotFoundException e) {
 			Test firstTest = new Test();
-			firstTest.setQuestions(generateQuestions(3));
+			firstTest.setQuestions(generateQuestions(1));
 			firstTest.setId("1");
 			repository.save(firstTest);
 		}
