@@ -15,9 +15,10 @@ public class RepositoryBasedNounImpl {
 	@Autowired
 	private NounRepository repository;
 	
+	
 	public Noun loadNounByCyNoun(String cyNoun) throws NounNotFoundException{
 		Optional<Noun> n = repository.findById(cyNoun);
-		
+
 		if(n.isPresent())
 			return n.get();
 		throw new NounNotFoundException(cyNoun + "not found");
