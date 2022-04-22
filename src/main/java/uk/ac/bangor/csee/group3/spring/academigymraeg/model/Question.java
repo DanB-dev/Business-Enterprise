@@ -1,49 +1,28 @@
 package uk.ac.bangor.csee.group3.spring.academigymraeg.model;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Question {
-    //Set up variables
-    private String phrase;
 
-    private String translateable;
+	// Set up variables
+	private String question;
+	private String answer;
 
-    private String answer;
+	public String getQuestion() {
+		return question;
+	}
 
-    //Constructor:
-    public Question(String inPhrase,String inTranslateable, String inAnswer){
-        phrase = inPhrase;
-        translateable = inTranslateable;
-        answer = inAnswer;
-    } 
+	public void setQuestion(String question) {
+		this.question = question;
+	}
 
-    //Set up setters
-    public void setPhrase(String phrase){
-        this.phrase = phrase;
-    }
+	public String getAnswer() {
+		return answer;
+	}
 
-    public void setTransalateable(String translateable){
-        this.translateable = translateable;
-    }
-
-    public void setAnswer(String answer){
-        this.answer = answer;
-    }
-
-    //Set up getters
-    public String getPhrase(){
-        return phrase;
-    }
-
-    public String getTranslateable(){
-        return translateable;
-    }
-
-    public String getAnswer(){
-        return answer;
-    }
-
-    //Get Whole to test
-    public String getWhole(){
-        return phrase + " "+ translateable + "is " + answer ;
-    }
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 
 }

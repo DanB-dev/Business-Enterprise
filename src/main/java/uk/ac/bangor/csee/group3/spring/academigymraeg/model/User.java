@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class User implements UserDetails {
 
 //hello
-	private static final long serialVersionUID = -4433946202794942362L;
+	private static final long serialVersionUID = 6353454865807995070L;
 
 	@Column(nullable = false)
 	private boolean admin = false, user = true, power = false;
