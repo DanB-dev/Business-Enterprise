@@ -27,7 +27,8 @@
 				</div>
 			</th:block>
 			<form th:action="@{/createTest}" th:object="${generatedTest}"
-				method="post" style="max-width: 600px; margin: 0 auto;">
+				method="post">
+				<input type="text" th:name="id"/> 
 				
 				<button type="submit">Save test</button>
 			</form>
