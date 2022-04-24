@@ -1,5 +1,6 @@
 package uk.ac.bangor.csee.group3.spring.academigymraeg;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,9 @@ public class RepositoryBasedNounImpl {
 		if(n.isPresent())
 			return n.get();
 		throw new NounNotFoundException(cyNoun + "not found");
+	}
+	
+	public List<Noun> loadAllNouns(){
+		return (List<Noun>) repository.findAll();
 	}
 }

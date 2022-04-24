@@ -69,22 +69,33 @@
         <p>The number one site to learn welsh nouns!</p> 
     </div>
     
+    <th:block th:if="${question != null and !question.empty}">FUckkk </th:block>
+    <div th:each="q : ${question}">
+    	<p th:text="${q.question}"></p>
+    </div>
+    
     <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <h2>Click here to login!</h2>
-				<h1><span class="glyphicon glyphicon-user col-md-4 text-center"></span></h1>
-                <p>And to continue your welsh noun learning journey.</p>
+                <a href="/login">
+                    <h1><span class="glyphicon glyphicon-user col-md-4 text-center"></span></h1>
+                    <p>And to continue your welsh noun learning journey.</p>
+                </a>
             </div>
             <div class="col-md-4">
+                <a href="/registration">
                 <h2>Click here to signup!</h2>
-				<h1><span class="glyphicon glyphicon-edit col-md-4 text-center"></span></h1>
-                <p>And to begin your welsh learning journey.</p>
+                    <h1><span class="glyphicon glyphicon-edit col-md-4 text-center"></span></h1>
+                    <p>And to begin your welsh learning journey.</p>
+                </a>
             </div>
             <div class="col-md-4">
+                <a href="/cat">
                 <h2>Click here to see a cat!</h2>
-				<h1><span class="glyphicon glyphicon-education col-md-4 text-center"></span></h1>
-                <p>Come back daily for new cats.</p>
+                    <h1><span class="glyphicon glyphicon-education col-md-4 text-center"></span></h1>
+                    <p>Come back daily for new cats.</p>
+                </a>
             </div>
         </div>
     </div>
