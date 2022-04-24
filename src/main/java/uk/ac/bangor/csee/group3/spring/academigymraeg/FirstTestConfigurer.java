@@ -2,6 +2,7 @@ package uk.ac.bangor.csee.group3.spring.academigymraeg;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.PostConstruct;
 
@@ -18,7 +19,7 @@ public class FirstTestConfigurer {
 
 	@Autowired
 	private RepositoryBasedNounImpl nounDetails;
-	
+
 	@Autowired
 	private TestRepository repository;
 
@@ -31,25 +32,39 @@ public class FirstTestConfigurer {
 			testDetails.loadTestById("1");
 		} catch (TestNotFoundException e) {
 			Test firstTest = new Test();
-			firstTest.setQuestions(generateQuestions(20));
+			firstTest.setQuestions(generateQuestions(1));
 			firstTest.setId("1");
 			repository.save(firstTest);
 		}
 	}
 
 	private List<Question> generateQuestions(int number) {
+		List<Noun> nouns = nounDetails.loadAllNouns();
+		
+		if(nouns.size() < number) {
+			throw new IllegalArgumentException("You have too few Nouns");
+		}
+
 		List<Question> q = new ArrayList<Question>();
-
+		List<Integer> used = new ArrayList<Integer>();
+		
 		for (int i = 0; i < number; i++) {
-			Question w = generate();
 
+			int rnd = new Random().nextInt(nouns.size());
+			while (used.contains(rnd)) {
+				rnd = new Random().nextInt(nouns.size());
+			}
+
+			Question w = generate(nouns.get(rnd));
 			q.add(w);
+			used.add(rnd);
+
 		}
 		return q;
 	}
 
-	private Question generate() {
-		Noun noun = nounDetails.loadNounByCyNoun("tatws");
+	private Question generate(Noun noun) {
+
 		Question finalQ = new Question();
 		int rnd = (int) Math.floor(Math.random() * 3);
 		switch (rnd) {

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Welcome</title>
+</head>
+<body>
+	<h1>Welcome to Academi Gymraeg - Secure</h1>
+	<div>
+		<table class="table table-striped table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>Id</th>
+					<th>Date Created</th>
+					<th>View test</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="test: ${loadedTests}">
+					<td th:text="${test.id}">Test</td>
+					<td th:text="${test.createdDate}">Date Created</td>
+					<td><form th:action="@{'/test/' + ${test.id}}">
+							<button type="submit">View</button>
+						</form></td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="/createTest"><button>Generate a new test</button></a>
+	</div>
+</body>
+</html>

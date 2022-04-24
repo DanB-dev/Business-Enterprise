@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Welcome</title>
+</head>
+<body>
+	<h1>Welcome to Academi Gymraeg - Secure</h1>
+	<div>
+		<th:block th:object=${questions}>
+			Test ID:<div th:text="${toShow.id}"></div>
+			<div th:each="q : ${questions}">
+				<p th:text="${q.question}"></p>
+			</div>
+	</div>
+</body>
+</html>
