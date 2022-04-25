@@ -1,72 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Nouns List</title>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-brand">Academi Gymraeg</div>
-            <button class = "navbar-toggle" data-toggle = "collapse" data-target=".navHeaderCollapse">
-                <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse navHeaderCollapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/welcome">Welcome</a>
-                        <!--not sure if this is the correct way of doing links inside the app-->
-                    </li>
-                    <li>
-                        <a href="/registration">Register</a>
-                    </li>
-                    <li>
-                        <a href="/login">Login</a>
-                    </li>
-                    <li class="dropdown active">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Nouns<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="/nouns">View Nouns</a>
-                            <li>
-                                <a href="/createNoun">Add Noun</a>
-                            </li>
-                            <li>
-                                <a href="/editNoun">Edit Noun</a>
-                            </li>
-                            <li>
-                                <a href="/deleteNoun">Delete Noun</a>
-                        </ul>
-                    </li>
+		<div class="container">
+			<div class="navbar-brand">Academi Gymraeg</div>
+			<button class="navbar-toggle" data-toggle="collapse"
+				data-target=".navHeaderCollapse">
+				<span class="icon-bar"></span><span class="icon-bar"></span><span
+					class="icon-bar"></span>
+			</button>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/welcome">Welcome</a> <!--not sure if this is the correct way of doing links inside the app-->
+					</li>
+					<li><a href="/register">Register</a></li>
+					<li><a href="/login">Login</a></li>
+					<li class="dropdown active"><a href="" class="dropdown-toggle"
+						data-toggle="dropdown">Nouns<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="/nouns">View Nouns</a>
+							<li><a href="/createNoun">Add Noun</a></li>
+							<li><a href="/editNoun">Edit Noun</a></li>
+							<li><a href="/deleteNoun">Delete Noun</a>
+						</ul></li>
 
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Users<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="/users">View Users</a>
-                            </li>
-                            <li>
-                                <a href="/saveUser">Create User</a>
-                            <li>
-                                <a href="/editUser">Edit User</a>
-                            </li>
-                            <li>
-                                <a href="/deleteUser">Delete User</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="jumbotron text-center">
-        <h1>Nouns List</h1>
-    </div>
-	<table  class="table table-striped table-bordered" th:if="${listNouns!=null and !listNouns.empty}">
+					<li class="dropdown"><a href="" class="dropdown-toggle"
+						data-toggle="dropdown">Users<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="/users">View Users</a></li>
+							<li><a href="/saveUser">Create User</a>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="jumbotron text-center">
+		<h1>Nouns List</h1>
+	</div>
+	<table class="table table-striped table-bordered"
+		th:if="${listNouns!=null and !listNouns.empty}">
 		<thead>
 			<tr>
 				<th>Welsh</th>
@@ -85,7 +68,8 @@
 						<button type="submit" class="btn btn-primary">Edit</button>
 					</form>
 					<form th:action="@{/deleteNoun(noun=${noun.cyNoun})}" method="post">
-						<button onclick="return confirm('Confirm noun deletion')" class="btn btn-primary">Delete</button>
+						<button onclick="return confirm('Confirm noun deletion')"
+							class="btn btn-primary">Delete</button>
 					</form>
 				</td>
 			</tr>
@@ -96,6 +80,6 @@
 	<th:block th:if="${listNouns==null or listNouns.empty}">
 		<p>There are no nouns to show... consider adding some now!</p>
 	</th:block>
-	<a href="/createNoun"><button>Add a Noun</button></a>
+	<a href="/createNoun"><button class="ms-1 btn btn-primary">Add a Noun</button></a>
 </body>
 </html>

@@ -1,90 +1,90 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<title>Edit Noun</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+	crossorigin="anonymous"></script>
+<title>Edit Noun</title>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-brand">Academi Gymraeg</div>
-            <button class = "navbar-toggle" data-toggle = "collapse" data-target=".navHeaderCollapse">
-                <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse navHeaderCollapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/welcome">Welcome</a>
-                        <!--not sure if this is the correct way of doing links inside the app-->
-                    </li>
-                    <li>
-                        <a href="/registration">Register</a>
-                    </li>
-                    <li>
-                        <a href="/login">Login</a>
-                    </li>
-                    <li class="dropdown active">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Nouns<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="/nouns">View Nouns</a>
-                            <li>
-                                <a href="/createNoun">Add Noun</a>
-                            </li>
-                            <li>
-                                <a href="/editNoun">Edit Noun</a>
-                            </li>
-                            <li>
-                                <a href="/deleteNoun">Delete Noun</a>
-                        </ul>
-                    </li>
+		<div class="container">
+			<div class="navbar-brand">Academi Gymraeg</div>
+			<button class="navbar-toggle" data-toggle="collapse"
+				data-target=".navHeaderCollapse">
+				<span class="icon-bar"></span><span class="icon-bar"></span><span
+					class="icon-bar"></span>
+			</button>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/welcome">Welcome</a> <!--not sure if this is the correct way of doing links inside the app-->
+					</li>
+					<li><a href="/registration">Register</a></li>
+					<li><a href="/login">Login</a></li>
+					<li class="dropdown active"><a href="" class="dropdown-toggle"
+						data-toggle="dropdown">Nouns<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="/nouns">View Nouns</a>
+							<li><a href="/createNoun">Add Noun</a></li>
+							<li><a href="/editNoun">Edit Noun</a></li>
+							<li><a href="/deleteNoun">Delete Noun</a>
+						</ul></li>
 
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Users<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="/users">View Users</a>
-                            </li>
-                            <li>
-                                <a href="/saveUser">Create User</a>
-                            <li>
-                                <a href="/editUser">Edit User</a>
-                            </li>
-                            <li>
-                                <a href="/deleteUser">Delete User</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+					<li class="dropdown"><a href="" class="dropdown-toggle"
+						data-toggle="dropdown">Users<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="/users">View Users</a></li>
+							<li><a href="/saveUser">Create User</a>
+							<li><a href="/editUser">Edit User</a></li>
+							<li><a href="/deleteUser">Delete User</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-    <div class="jumbotron text-center">
-        <h1>Edit Noun</h1>
-    </div>
+	<div class="jumbotron text-center">
+		<h1>Edit Noun</h1>
+	</div>
 
-	<div class= "container text-center" >
+	<div class="container text-center">
 		<form th:action="@{/saveNoun}" th:object="${noun}" method="post">
-            <div class="m-3">
-                <div class="form-group row">
-                    <label >Welsh Noun <input type="text" th:field="*{cyNoun}"></label>
-                </div>
-                <div class="form-group row">
-                    <label>English Noun <input type="text" th:field="*{enNoun}"></label>
-                </div>
-            </div>
-            <label th:for="masc"> Masculine</label>
-            <input type="radio" name="cyGender" value="masculine" th:id="masc" >
-                <label th:for="fem"> Feminine</label> 
-                <input type="radio"name="cyGender" value="feminine" th:id="fem">
-            <div>
-			    <button class="btn btn-primary" type="submit">Save</button>
-            </div>
+			<div class="m-3">
+				<div class="form-group row">
+					<label>Welsh Noun <input type="text" class="form-control"
+						th:field="*{cyNoun}"></label>
+				</div>
+				<div class="form-group row">
+					<label>English Noun <input type="text" class="form-control"
+						th:field="*{enNoun}"></label>
+				</div>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="cyGender"
+					value="masculine" th:checked="${noun.cyGender == 'masculine'}"
+					th:id="masc"><label class="form-check-label" th:for="masc">
+					Masculine</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="cyGender"
+					value="feminine" th:checked="${noun.cyGender == 'feminine'}"
+					th:id="fem"> <label class="form-check-label" th:for="fem">
+					Feminine</label>
+			</div>
+
+			<div>
+				<button class="btn btn-primary" type="submit">Save</button>
+			</div>
 		</form>
 	</div>
 </body>

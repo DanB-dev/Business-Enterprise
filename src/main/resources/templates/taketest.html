@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+	crossorigin="anonymous"></script>
+<title>Welcome</title>
+</head>
+<body>
+	<h1>Welcome to Academi Gymraeg - Secure</h1>
+	<div class="container container-fluid">
+		<h3>Test Details</h3>
+		<th:block th:object=${questions}>
+			<p>
+				<b>Test ID:</b> <span th:text="${toShow.id}"></span>
+			</p>
+			<p>
+				<b>For:</b> <span th:text="${toShow.user}"></span>
+			</p>
+			<p>
+				<b>Generated:</b> <span
+					th:text="${#dates.format(toShow.createdDate,'dd/MM/yyyy')}"></span>
+			</p>
+			<p>
+				<b>Started:</b> <span
+					th:text="${#dates.format(toShow.startedDate,'dd/MM/yyyy')}"></span>
+			</p>
+
+			<h4>Questions</h4>
+			<form th:action="@{/submittest}" method="post" th:object="${form}">
+				<th:block th:each="f,stat: ${questions}">
+					<label th:text="${questions[__${stat.index}__].question}"></label>
+					<input th:name="${questions[__${stat.index}__].answer}"/>
+				
+				</th:block>
+				<button type="submit">Submit</button>
+			</form>
+	</div>
+</body>
+</html>
