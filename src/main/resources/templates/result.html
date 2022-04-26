@@ -7,12 +7,15 @@
 <body>
 	<h1>Welcome to Academi Gymraeg - Secure</h1>
 	<div>
+		<h3 th:text="${total + '/20 😞'}"></h3>
 		<th:block th:object=${form}>
 			<th:block th:each="q:${form.answers}">
-				question
-				<p th:text="${q.question}"></p>
-				Answer
-				<p th:text="${q.answer}"></p>
+				<h4 th:text="${q.question}"></h4>
+				<p><b>Your Answer:</b> <span th:text="${q.answer}"></span></p>
+				<p><b>Correct Answer:</b> <span th:text="${q.noun}"></span></p>
+
+				<p th:if="${q.isCorrect}" th:text="${'Correct 😁'}"></p>
+				<p th:if="${!q.isCorrect}" th:text="${'Incorrect 😖'}"></p>
 			</th:block>
 		</th:block>
 

@@ -34,10 +34,13 @@
 			<h4>Questions</h4>
 			<form th:action="@{/submittest}" method="post" th:object="${form}">
 				<th:block th:each="f,stat: *{answers}">
-					<label th:for="*{answers[__${stat.index}__].answer}" th:text="${questions[__${stat.index}__].question}"></label>
+					<label th:for="*{answers[__${stat.index}__].answer}"
+						th:text="${questions[__${stat.index}__].question}"></label>
 					<input th:field="*{answers[__${stat.index}__].answer}" />
 					<input type="hidden"
-						th:field="*{answers[__${stat.index}__].question}"/>
+						th:field="*{answers[__${stat.index}__].question}" />
+					<input type="hidden"
+						th:field="*{answers[__${stat.index}__].noun}" />
 				</th:block>
 				<button type="submit">Submit</button>
 			</form>

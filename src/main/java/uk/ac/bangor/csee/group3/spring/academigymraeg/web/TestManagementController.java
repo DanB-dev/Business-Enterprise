@@ -105,9 +105,25 @@ public class TestManagementController {
 	
 	@PostMapping("/submittest")
 	public String submitTest(@ModelAttribute AnswersCreationDto form, Model model) {
+		
+		int total = 0;
+		for (Question answer: form.getAnswers()) {
+			if(answer.getAnswer().equalsIgnoreCase(answer.getNoun())) {
+				answer.setIsCorrect(true);
+				total++;
+			}else {
+				answer.setIsCorrect(false);
+			}
+		}
+		
 		model.addAttribute("form", form);
+		model.addAttribute("total",total);
 		return "result";
 	}
+	
+	
+	
+	
 
 	private List<Question> generateQuestions(int number) {
 		List<Noun> nouns = nounDetails.loadAllNouns();
