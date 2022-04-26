@@ -7,10 +7,15 @@
 <body>
 	<h1>Welcome to Academi Gymraeg - Secure</h1>
 	<div>
-		<th:block th:object=${questions}>
-			<div th:each="a : ${questions}">
-				<p th:text="${a.answers}"></p>
-			</div>
+		<th:block th:object=${form}>
+			<th:block th:each="q:${form.answers}">
+				question
+				<p th:text="${q.question}"></p>
+				Answer
+				<p th:text="${q.answer}"></p>
+			</th:block>
+		</th:block>
+
 	</div>
 </body>
 </html>

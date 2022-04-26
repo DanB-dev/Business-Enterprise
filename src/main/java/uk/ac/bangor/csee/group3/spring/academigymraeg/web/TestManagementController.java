@@ -12,13 +12,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import uk.ac.bangor.csee.group3.spring.academigymraeg.AnswersCreationDto;
 import uk.ac.bangor.csee.group3.spring.academigymraeg.RepositoryBasedNounImpl;
@@ -37,8 +35,6 @@ public class TestManagementController {
 	@Autowired
 	private TestRepository repository;
 	
-	@Autowired
-	private AnswersCreationDto testForm;
 
 	@Autowired
 	private RepositoryBasedTestImpl testDetails;
@@ -75,14 +71,18 @@ public class TestManagementController {
 		repository.save(toShow);
 		
 		
-		
-		for (int i = 0; i < 1; i++) {
-			testForm.addAnswer(questions.get(i));
+		AnswersCreationDto testForm = new AnswersCreationDto();
+		for (int i=0; i < questions.size(); i++) {
+			Question q = new Question();
+			q.setQuestion(questions.get(i).getQuestion());
+			q.setNoun(questions.get(i).getNoun());
+			testForm.addAnswer(q);
 		}
 		
+				
 		model.addAttribute("toShow", toShow);
 		model.addAttribute("questions", questions);
-		model.addAttribute("form", testForm);
+		model.addAttribute("form",testForm);
 		return "taketest";
 	}
 
@@ -104,8 +104,8 @@ public class TestManagementController {
 	}
 	
 	@PostMapping("/submittest")
-	public String submitTest(@ModelAttribute("form") AnswersCreationDto form, Model model) {
-		model.addAttribute("questions", form);
+	public String submitTest(@ModelAttribute AnswersCreationDto form, Model model) {
+		model.addAttribute("form", form);
 		return "result";
 	}
 
@@ -141,15 +141,15 @@ public class TestManagementController {
 		switch (rnd) {
 		case 0:
 			finalQ.setQuestion("What is the Welsh noun for " + noun.getEnNoun()+"?");
-			finalQ.setAnswer(noun.getCyNoun());
+			finalQ.setNoun(noun.getCyNoun());
 			break;
 		case 1:
 			finalQ.setQuestion("What is the English noun for " + noun.getCyNoun()+"?");
-			finalQ.setAnswer(noun.getEnNoun());
+			finalQ.setNoun(noun.getEnNoun());
 			break;
 		case 2:
 			finalQ.setQuestion("What is the gender of the welsh noun " + noun.getCyNoun()+"?");
-			finalQ.setAnswer(noun.getCyGender());
+			finalQ.setNoun(noun.getCyGender());
 			break;
 		default:
 			break;
