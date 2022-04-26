@@ -5,24 +5,50 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Question {
 
+	private String answer;
+	private Boolean isCorrect;
+	private String noun;
+	private String q_id;
+
 	// Set up variables
 	private String question;
-	private String answer;
-
-	public String getQuestion() {
-		return question;
-	}
-
-	public void setQuestion(String question) {
-		this.question = question;
-	}
 
 	public String getAnswer() {
 		return answer;
 	}
+	
+	public Boolean getIsCorrect() {
+		return isCorrect;
+	}
+	public String getNoun() {
+		return noun;
+	}
 
+	public String getQ_id() {
+		return q_id;
+	}
+
+	public String getQuestion() {
+		return question;
+	}
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+	public void setIsCorrect(Boolean isCorrect) {
+		this.isCorrect = isCorrect;
+	}
+
+
+	public void setNoun(String noun) {
+		this.noun = noun;
+	}
+
+	public void setQ_id(String q_id) {
+		this.q_id = q_id;
+	}
+
+	public void setQuestion(String question) {
+		this.question =  question;
 	}
 
 }

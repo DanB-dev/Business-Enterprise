@@ -34,6 +34,7 @@ public class FirstTestConfigurer {
 			Test firstTest = new Test();
 			firstTest.setQuestions(generateQuestions(1));
 			firstTest.setId("1");
+			firstTest.setUser("admin");
 			repository.save(firstTest);
 		}
 	}
