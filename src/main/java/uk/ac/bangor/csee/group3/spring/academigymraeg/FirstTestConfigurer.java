@@ -1,5 +1,6 @@
 package uk.ac.bangor.csee.group3.spring.academigymraeg;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,6 +34,10 @@ public class FirstTestConfigurer {
 			firstTest.setQuestions(generateQuestions(1));
 			firstTest.setId("1");
 			firstTest.setUser("admin");
+			firstTest.setCreatedDate(Instant.now());
+			firstTest.setStartedDate(Instant.now());
+			firstTest.setResult(1);
+			firstTest.setStatus("Submitted");
 			repository.save(firstTest);
 		}
 	}

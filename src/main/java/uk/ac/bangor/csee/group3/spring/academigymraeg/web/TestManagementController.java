@@ -1,9 +1,15 @@
 package uk.ac.bangor.csee.group3.spring.academigymraeg.web;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -17,9 +23,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lowagie.text.DocumentException;
+
 import uk.ac.bangor.csee.group3.spring.academigymraeg.AnswersCreationDto;
 import uk.ac.bangor.csee.group3.spring.academigymraeg.RepositoryBasedNounImpl;
 import uk.ac.bangor.csee.group3.spring.academigymraeg.RepositoryBasedTestImpl;
+import uk.ac.bangor.csee.group3.spring.academigymraeg.ResultsPDFExporter;
 import uk.ac.bangor.csee.group3.spring.academigymraeg.model.Noun;
 import uk.ac.bangor.csee.group3.spring.academigymraeg.model.Question;
 import uk.ac.bangor.csee.group3.spring.academigymraeg.model.Test;
@@ -173,6 +182,23 @@ public class TestManagementController {
 		model.addAttribute("total", total);
 		return "result";
 	}
+	
+	
+    @GetMapping("/results/export/pdf")
+    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+         
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=results_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+         
+        List<Test> listTests = (List<Test>) repository.findAll();
+         
+        ResultsPDFExporter exporter = new ResultsPDFExporter(listTests);
+        exporter.export(response);
+    }
 
 	private List<Question> generateQuestions(int number) {
 		List<Noun> nouns = nounDetails.loadAllNouns();
