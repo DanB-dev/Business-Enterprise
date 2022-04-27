@@ -1,122 +1,112 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<title>Welcome</title>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <title>Welcome</title>
 </head>
+
 <body>
-	<div class="container">
-		<nav class="navbar navbar-expand-md navbar-light">
-			<div class="navbar-brand">Academi Gymraeg</div>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu"
-				aria-controls="toggleMobileMenu" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="toggleMobileMenu">
-				<ul class="navbar-nav text-center">
-					<li class="nav-item"><a class="nav-link" href="/welcome">Home</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="/login">Login</a>
-					</li>
-					<li class="nav-item dropdown">
-						<div class="nav-link dropdown-toggle" id="navbarDropdown"
-							role="button" data-bs-toggle="dropdown" aria-expanded="false">Tests</div>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="/usertests">View My
-									Tests</a></li>
-							<li><a class="dropdown-item" href="/tests">View All
-									Tests</a></li>
-							<li><a class="dropdown-item" href="/createTest">Take
-									Test</a></li>
-						</ul>
-					</li>
-					<!--dropdown-->
-					<li class="nav-item dropdown">
-						<div class="nav-link dropdown-toggle" id="navbarDropdown"
-							role="button" data-bs-toggle="dropdown" aria-expanded="false">Users</div>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="/users">View Users</a></li>
-							<li><a class="dropdown-item" href="/register">Register
-									New User</a></li>
-						</ul>
-					</li>
-					<!--dropdown-->
-					<li class="nav-item dropdown">
-						<div class="nav-link dropdown-toggle active" id="navbarDropdown"
-							role="button" data-bs-toggle="dropdown" aria-expanded="false">Nouns</div>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="/nouns">View Nouns</a></li>
-							<li><a class="dropdown-item" href="/createNoun">Add Noun</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</div>
-
-	<div class="container container-fluid mt-5">
-		<h3>Test Details</h3>
-		<th:block th:object=${questions}>
-			<p>
-				<b>Test ID:</b> <span th:text="${toShow.id}"></span>
-			</p>
-			<p>
-				<b>For:</b> <span th:text="${toShow.user}"></span>
-			</p>
-			<p>
-				<b>Generated:</b> <span
-					th:text="${#dates.format(toShow.createdDate,'dd/MM/yyyy - HH:mm')}"></span>
-			</p>
-			<p>
-				<b>Started:</b> <span
-					th:text="${#dates.format(toShow.startedDate,'dd/MM/yyyy - HH:mm')}"></span>
-			</p>
-			<p>
-				<b>Status:</b> <span th:text="${toShow.status}"></span>
-			</p>
+  <div class="container">
+    <nav class="navbar navbar-expand-md navbar-light">
+      <div class="navbar-brand">Academi Gymraeg</div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu"
+        aria-controls="toggleMobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="toggleMobileMenu">
+        <ul class="navbar-nav text-center">
+          <li class="nav-item"><a class="nav-link" href="/welcome">Home</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item dropdown">
+            <div class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Tests</div>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/usertests">View My
+                  Tests</a></li>
+              <li><a class="dropdown-item" href="/tests">View All
+                  Tests</a></li>
+              <li><a class="dropdown-item" href="/createTest">Take
+                  Test</a></li>
+            </ul>
+          </li>
+          <!--dropdown-->
+          <li class="nav-item dropdown">
+            <div class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Users</div>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/users">View Users</a></li>
+              <li><a class="dropdown-item" href="/register">Register
+                  New User</a></li>
+            </ul>
+          </li>
+          <!--dropdown-->
+          <li class="nav-item dropdown">
+            <div class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Nouns</div>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/nouns">View Nouns</a></li>
+              <li><a class="dropdown-item" href="/createNoun">Add Noun</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="container-fluid p-5 bg-primary text-white text-center">
+    <h1>Welcome to Academi Gymraeg - Secure</h1>
+  </div>
+  <div class="container container-fluid">
+    <h3 class="text-center">Test Details</h3>
+    <th:block th:object=${questions}>
+      <p class="text-center">
+        <b>Test ID:</b> <span th:text="${toShow.id}"></span>
+      </p>
+      <p class="text-center">
+        <b>For:</b> <span th:text="${toShow.user}"></span>
+      </p>
+      <p class="text-center">
+        <b>Generated:</b> <span th:text="${#dates.format(toShow.createdDate,'dd/MM/yyyy - HH:mm')}"></span>
+      </p>
+      <p class="text-center">
+        <b>Started:</b> <span th:text="${#dates.format(toShow.startedDate,'dd/MM/yyyy - HH:mm')}"></span>
+      </p>
+      <p>
+        <b>Status:</b> <span th:text="${toShow.status}"></span>
+      </p>
 
 
-			<hr />
-			<form th:action="@{/savetest}" method="post" th:object="${form}"
-				class="container">
-				<div class="text-center">
-					<h4 class="mb-4" th:text="${'Questions ('+questions.size()+')'}"></h4>
-				</div>
-				<div th:each="f,stat: *{answers}">
-					<div class="row my-2 w-75 mx-auto"
-						style="border-bottom: 1px solid lightgrey; padding-bottom: 10px;">
-						<div class="col">
-							<span style="line-height: 35px;"
-								th:for="${'answers__${stat.index}__.answer'}"
-								th:text="${questions[__${stat.index}__].question}"></span>
-						</div>
-						<div class="col">
-							<input class="form-control"
-								th:field="*{answers[__${stat.index}__].answer}"
-								autocomplete="off"
-								th:disabled="${#strings.equals(toShow.status,'Submitted')}" />
-						</div>
-					</div>
-				</div>
-				<input type="hidden" th:field="*{id}" />
+      <hr />
+      <form th:action="@{/savetest}" method="post" th:object="${form}" class="container">
+        <div class="text-center">
+          <h4 class="mb-4" th:text="${'Questions ('+questions.size()+')'}"></h4>
+        </div>
+        <div th:each="f,stat: *{answers}">
+          <div class="row my-2 w-75 mx-auto" style="border-bottom: 1px solid lightgrey; padding-bottom: 10px;">
+            <div class="col">
+              <span style="line-height: 35px;" th:for="${'answers__${stat.index}__.answer'}"
+                th:text="${questions[__${stat.index}__].question}"></span>
+            </div>
+            <div class="col">
+              <input class="form-control" th:field="*{answers[__${stat.index}__].answer}" autocomplete="off"
+                th:disabled="${#strings.equals(toShow.status,'Submitted')}" />
+            </div>
+          </div>
+        </div>
+        <input type="hidden" th:field="*{id}" />
 
-				<div th:if="${!#strings.equals(toShow.status,'Submitted')}"
-					class="text-center mt-4">
-					<button class="btn btn-primary" type="submit" name="action"
-						value="submit">Submit</button>
-					<button class="btn btn-secondary" type="submit" name="action"
-						value="save">Save Progress</button>
-				</div>
+        <div th:if="${!#strings.equals(toShow.status,'Submitted')}" class="text-center mt-4">
+          <button class="btn btn-primary" type="submit" name="action" value="submit">Submit</button>
+          <button class="btn btn-secondary" type="submit" name="action" value="save">Save Progress</button>
+        </div>
 
-			</form>
-	</div>
+      </form>
+  </div>
 </body>
+
 </html>
