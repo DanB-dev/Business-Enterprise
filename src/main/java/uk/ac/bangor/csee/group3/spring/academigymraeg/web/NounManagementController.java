@@ -44,14 +44,14 @@ public class NounManagementController {
 	}
 	
 	@PostMapping("/deleteNoun")
-	public String deleteNoun(@RequestParam String noun) {
-		repository.deleteById(noun);
+	public String deleteNoun(@RequestParam String id) {
+		repository.deleteById(id);
 		return "redirect:/nouns";
 	}
 	
 	@RequestMapping("/editNoun")
-	public String editNoun(String cyNoun, Model model) {
-		Noun noun = (Noun) nounDetails.loadNounByCyNoun(cyNoun);
+	public String editNoun(String id, Model model) {
+		Noun noun = (Noun) nounDetails.loadNounById(id);
 		model.addAttribute("noun", noun);
 		return "editNoun";
 	}
@@ -61,7 +61,7 @@ public class NounManagementController {
 		if(result.hasErrors())
 			return showEditNoun(model);
 		
-		repository.save(noun);
+		repository.updateNoun(noun.getCyNoun(), noun.getEnNoun(), noun.getCyGender(), noun.getId());
 		return showNounList(model);
 	}
 }

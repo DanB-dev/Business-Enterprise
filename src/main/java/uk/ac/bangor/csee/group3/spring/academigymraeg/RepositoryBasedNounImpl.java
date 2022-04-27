@@ -17,7 +17,7 @@ public class RepositoryBasedNounImpl {
 	
 	
 	public Noun loadNounByCyNoun(String cyNoun) throws NounNotFoundException{
-		Optional<Noun> n = repository.findById(cyNoun);
+		Optional<Noun> n = repository.findByCyNoun(cyNoun);
 
 		if(n.isPresent())
 			return n.get();
@@ -26,5 +26,13 @@ public class RepositoryBasedNounImpl {
 	
 	public List<Noun> loadAllNouns(){
 		return (List<Noun>) repository.findAll();
+	}
+	
+	public Noun loadNounById(String id){
+		Optional<Noun> n = repository.findById(id);
+
+		if(n.isPresent())
+			return n.get();
+		return null;
 	}
 }

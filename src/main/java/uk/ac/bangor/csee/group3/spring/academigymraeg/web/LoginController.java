@@ -29,8 +29,10 @@ public class LoginController {
 	
 	@RequestMapping("/secure")
 	public String showSecurePage() {
-		return "secure";
+		return "redirect:/welcome";
 	}
+	
+	
 	
 
 }

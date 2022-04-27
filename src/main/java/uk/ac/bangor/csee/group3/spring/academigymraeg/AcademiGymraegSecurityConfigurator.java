@@ -31,10 +31,6 @@ public class AcademiGymraegSecurityConfigurator extends WebSecurityConfigurerAda
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-		.antMatchers("/secure")
-		.hasRole("USER")
-		.antMatchers("/users")
-		.hasRole("ADMIN")
 		.antMatchers("/*")
 		.permitAll()
 		.anyRequest()
