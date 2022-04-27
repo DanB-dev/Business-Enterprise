@@ -61,52 +61,59 @@
     </nav>
   </div>
 
-
+  
   <div class="container-fluid p-5 bg-primary text-white text-center">
     <h1>Welcome to Academi Gymraeg!</h1>
     <p>The number one site to learn welsh nouns!</p>
   </div>
-
-  <div class="container mt-5 text-center">
-    <th:block th:if="${loggedIn}">
-      <p>Logged in as <span th:text="${username}"></span></p>
-      <a href="/logout" class="btn btn-primary">Logout</a>
-    </th:block>
-    <div class="row text-center">
-
-      <div class="col-sm-4" th:if="${!loggedIn}">
-        <a href="/login">
-          <h2 class="text-center">Click here to login!</h2>
-          <h1 class="text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-person"
-              viewBox="0 0 16 16">
-              <path
-                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-            </svg>
-          </h1>
-          <h1>
-            <span class="glyphicon glyphicon-user col-md-4 text-center"></span>
-          </h1>
-          <p class="text-center">To continue your welsh noun learning
-            journey.</p>
-        </a>
+  <!--Logged in as  -->
+  <div>
+    <div class="container mt-5 text-center">
+        <th:block th:if="${loggedIn}">
+          <p>Logged in as <span th:text="${username}"></span></p>
+          <a href="/logout" class="btn btn-primary">Logout</a>
+        </th:block>
+        <div class="row text-center">
+    </div>
+      <!-- logged in end-->
+      <!--click to login  -->
+      <div class="container d-flex align-items-center justify-content-center">
+        <div class="col-sm-4" th:if="${!loggedIn}">
+          <a href="/login">
+            <h2 class="text-center">Click here to login!</h2>
+            <h1 class="text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-person"
+                viewBox="0 0 16 16">
+                <path
+                  d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+              </svg>
+            </h1>
+            <h1>
+              <span class="glyphicon glyphicon-user col-md-4 text-center"></span>
+            </h1>
+            <p class="text-center">To continue your welsh noun learning
+              journey.</p>
+          </a>
+        </div>
       </div>
-
-
-      <div class="col-sm-4" th:if="${loggedIn}">
-        <a href="/createTest">
-          <h2 class="text-center">Click here to take a test</h2>
-          <h1 class="text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
-              class="bi bi-clipboard-fill" viewBox="0 0 16 16">
-              <path fill-rule="evenodd"
-                d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z" />
-            </svg>
-          </h1>
-          <p class="text-center">You may need to login first..</p>
-        </a>
+      <!--login end -->
+      <!-- click to take test-->
+      <div class="container d-flex align-items-center justify-content-center">
+        <div class="col-sm-4" th:if="${loggedIn}">
+          <a href="/createTest">
+            <h2 class="text-center">Click here to take a test</h2>
+            <h1 class="text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
+                class="bi bi-clipboard-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z" />
+              </svg>
+            </h1>
+            <p class="text-center">You may need to login first..</p>
+          </a>
+        </div>
       </div>
-
+      <!--test end -->
     </div>
   </div>
 </body>
