@@ -1,29 +1,123 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <title>Welcome</title>
 </head>
 <body>
-	<h1>Welcome to Academi Gymraeg - Secure</h1>
-	<div>
-		<h3 th:text="${total + '/20 😞'}"></h3>
-		
-		<th:block th:object=${form}>
-			<p th:text="${form.id}"></p>
-			<th:block th:each="q:${form.answers}">
-				<h4 th:text="${q.question}"></h4>
-				<p><b>Your Answer:</b> <span th:text="${q.answer}"></span></p>
-				<p><b>Correct Answer:</b> <span th:text="${q.noun}"></span></p>
+	<div class="container">
+		<nav class="navbar navbar-expand-md navbar-light">
+			<div class="navbar-brand">Academi Gymraeg</div>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu"
+				aria-controls="toggleMobileMenu" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="toggleMobileMenu">
+				<ul class="navbar-nav text-center">
+					<li class="nav-item"><a class="nav-link active"
+						href="/welcome">Home</a></li>
 
-				<p th:if="${q.isCorrect}" th:text="${'Correct 😁'}"></p>
-				<p th:if="${!q.isCorrect}" th:text="${'Incorrect 😖'}"></p>
+					<li class="nav-item"><a class="nav-link" href="/login">Login</a>
+					</li>
+					<li class="nav-item dropdown">
+						<div class="nav-link dropdown-toggle" id="navbarDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">Tests</div>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/usertests">View My
+									Tests</a></li>
+							<li><a class="dropdown-item" href="/tests">View All
+									Tests</a></li>
+							<li><a class="dropdown-item" href="/createTest">Take
+									Test</a></li>
+						</ul>
+					</li>
+
+					<!--dropdown-->
+					<li class="nav-item dropdown">
+						<div class="nav-link dropdown-toggle" id="navbarDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">Users</div>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/users">View Users</a></li>
+							<li><a class="dropdown-item" href="/register">Register
+									New User</a></li>
+						</ul>
+					</li>
+					<!--dropdown-->
+					<li class="nav-item dropdown">
+						<div class="nav-link dropdown-toggle" id="navbarDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">Nouns</div>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/nouns">View Nouns</a></li>
+							<li><a class="dropdown-item" href="/createNoun">Add Noun</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<div class="container-fluid p-5 bg-primary text-white text-center"
+		style="background: linear-gradient(241deg, rgba(119, 69, 255, 1) 0%, rgba(13, 110, 253, 1) 39%, rgba(69, 170, 255, 1) 64%, rgba(69, 226, 255, 1) 100%);">
+		<div th:if="${total eq 0}">
+			<h3 th:text="${total + '/20 🤡'}"></h3>
+			<span>Did you even try? </span>
+		</div>
+		<div th:if="${total gt 0} and ${total lt 4}">
+			<h3 th:text="${total + '/20 😕'}"></h3>
+			<span>At least you tried, <em>I guess</em>?</span>
+		</div>
+		<div th:if="${total gt 4} and ${total lt 10}">
+			<h3 th:text="${total + '/20 😩'}"></h3>
+			<span>Not too Shabby, could be better.</span>
+		</div>
+		<div th:if="${total gt 10} and ${total lt 15}">
+			<h3 th:text="${total + '/20 🤔'}"></h3>
+			<span>Now we're talking </span>
+		</div>
+		<div th:if="${total gt 15} and ${total lt 19}">
+			<h3 th:text="${total + '/20 🤓'}"></h3>
+			<span>Nice Work </span>
+		</div>
+		<div th:if="${total eq 20}">
+			<h3 th:text="${total + '/20 😇'}"></h3>
+			<span>Have you even slept? </span>
+		</div>
+	</div>
+	<div class="container">
+		<div class="text-center mt-4">
+			<h3>Results</h3>
+			<hr />
+		</div>
+
+		<th:block th:object=${form}>
+			<th:block th:each="q:${form.answers}">
+				<div class="row mb-3" style="border-bottom: 2px solid lightgrey;">
+					<h4 th:text="${q.question}"></h4>
+					<p th:if="${q.isCorrect}" th:text="${'Correct 😁'}"></p>
+					<p th:if="${!q.isCorrect}" th:text="${'Incorrect 😖'}"></p>
+					<div class="col">
+						<b>Your Answer:</b>
+						<th:block th:if="${q.answer == null or q.answer == ''}">
+							<span class="text-muted">No Input Given</span>
+						</th:block>
+						<span th:if="${q.answer != null}" th:text="${q.answer}"></span>
+					</div>
+					<div class="col">
+						<b>Correct Answer:</b> <span th:text="${q.noun}"></span>
+					</div>
+
+				</div>
+
 			</th:block>
 		</th:block>
-
 	</div>
 </body>
 </html>
