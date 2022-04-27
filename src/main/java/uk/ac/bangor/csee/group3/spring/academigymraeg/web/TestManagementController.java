@@ -2,14 +2,11 @@ package uk.ac.bangor.csee.group3.spring.academigymraeg.web;
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -17,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -41,7 +37,8 @@ public class TestManagementController {
 
 	@Autowired
 	private RepositoryBasedTestImpl testDetails;
-
+	
+	@Secured("ROLE_USER")
 	@GetMapping("/createTest")
 	public String createTest(Model model) {
 		List<Question> generatedTest = generateQuestions(3);
@@ -68,6 +65,7 @@ public class TestManagementController {
 		return "redirect:/taketest/" + saved.getId();
 	}
 	
+	@Secured("ROLE_USER")
 	@GetMapping("/taketest/{id}")
 	public String takeTest(@PathVariable("id") String id, Model model) {
 		Test toShow = testDetails.loadTestById(id);
@@ -93,7 +91,8 @@ public class TestManagementController {
 		model.addAttribute("form",testForm);
 		return "taketest";
 	}
-
+	
+	@Secured({"ROLE_POWER","ROLE_ADMIN"})
 	@RequestMapping("/tests")
 	public String showTests(Model model) {
 		List<Test> loadedTests = testDetails.loadAllTests();
@@ -102,6 +101,7 @@ public class TestManagementController {
 		return "tests";
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping("/usertests")
 	public String showUserTests(Model model) {
 		
@@ -120,7 +120,8 @@ public class TestManagementController {
 		
 		return "usertests";
 	}
-
+	
+	@Secured({"ROLE_POWER","ROLE_ADMIN"})
 	@GetMapping("/test/{id}")
 	public String showTest(@PathVariable("id") String id, Model model) {
 		Test toShow = testDetails.loadTestById(id);
@@ -132,6 +133,7 @@ public class TestManagementController {
 	
 	
 	// Allow users to save the test. They can come back any time and change answers.
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/savetest", method=RequestMethod.POST,params="action=save")
 	public String saveTest(@ModelAttribute AnswersCreationDto form, Model model) {
 		Test toMark = testDetails.loadTestById(form.getId());
@@ -147,6 +149,7 @@ public class TestManagementController {
 	
 	
 	//Submit Test. Users Who Submit won't be able to change answers.
+	@Secured("ROLE_USER")
 	@RequestMapping(value="/savetest", method=RequestMethod.POST,params="action=submit")
 	public String submitTest(@ModelAttribute AnswersCreationDto form, Model model) {
 		Test toMark = testDetails.loadTestById(form.getId());

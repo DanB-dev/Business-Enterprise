@@ -82,11 +82,11 @@
 					<td th:text="${noun.enNoun}">English</td>
 					<td th:text="${noun.cyGender}">Gender</td>
 					<td class="row row-cols-md-auto g-0 align-items-center">
-						<form th:action="@{/editNoun(cyNoun=${noun.cyNoun})}"
+						<form th:action="@{/editNoun(id=${noun.id})}"
 							method="post">
 							<button type="submit" class="btn btn-primary">Edit</button>
 						</form>
-						<form th:action="@{/deleteNoun(noun=${noun.cyNoun})}"
+						<form th:action="@{/deleteNoun(id=${noun.id})}"
 							method="post">
 							<button onclick="return confirm('Confirm noun deletion')"
 								class="btn btn-primary ms-1">Delete</button>

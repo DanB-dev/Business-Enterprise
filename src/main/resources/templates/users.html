@@ -84,7 +84,7 @@
 					<td th:text="${user.isPower}">Is instructor</td>
 					<td th:text="${user.isUser}">Active account</td>
 					<td class="row row-cols-md-auto g-0 align-items-center">
-						<form th:action="@{/deleteUser(user=${user.username})}"
+						<form th:action="@{/deleteUser(id=${user.id})}"
 							method="post">
 							<button onclick="return confirm('Confirm user deletion')"
 								class="btn btn-primary" type="submit">Delete</button>

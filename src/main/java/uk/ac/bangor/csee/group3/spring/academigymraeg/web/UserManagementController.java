@@ -39,8 +39,8 @@ public class UserManagementController {
 	}
 
 	@PostMapping("/deleteUser")
-	public String deleteUser(@RequestParam String user) {
-		repository.deleteById(user);
+	public String deleteUser(@RequestParam String id) {
+		repository.deleteById(id);
 
 		return "redirect:/users";
 	}
