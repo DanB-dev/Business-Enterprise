@@ -1,9 +1,14 @@
 package uk.ac.bangor.csee.group3.spring.academigymraeg;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import uk.ac.bangor.csee.group3.spring.academigymraeg.model.Noun;
 import uk.ac.bangor.csee.group3.spring.academigymraeg.repository.NounRepository;
@@ -19,16 +24,27 @@ public class FirstNounConfigurer {
 
 	@PostConstruct
 	public void createFirstNoun() {
-		try {
-			Noun loaded = nounDetails.loadNounByCyNoun("tatws");
-			System.out.println(loaded);
-		} catch (NounNotFoundException e) {
-			Noun firstNoun = new Noun();
-			firstNoun.setCyNoun("tatws");
-			firstNoun.setCyGender("feminine");
-			firstNoun.setEnNoun("potato");
-			repository.save(firstNoun);
+
+		if (nounDetails.loadAllNouns().size() < 1) {
+			
+			List<Noun> toReturn = null;
+			
+			ObjectMapper oMapper = new ObjectMapper();
+			try {
+				toReturn = oMapper.readValue(FirstNounConfigurer.class.getResourceAsStream("/nouns.json"), new TypeReference<List<Noun>>() {});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			repository.saveAll(toReturn);
+			
+			
 		}
+
+	}
+	
+	public void getProducts() {
+
 	}
 
 }

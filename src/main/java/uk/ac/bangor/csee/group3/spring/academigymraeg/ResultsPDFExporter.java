@@ -2,7 +2,13 @@ package uk.ac.bangor.csee.group3.spring.academigymraeg;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Formatter;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,8 +29,8 @@ public class ResultsPDFExporter {
 	private List<Test> listTests;
 
 	public ResultsPDFExporter(List<Test> listTests) {
-        this.listTests = listTests;
-    }
+		this.listTests = listTests;
+	}
 
 	private void writeTableHeader(PdfPTable table) {
 		PdfPCell cell = new PdfPCell();
@@ -55,11 +61,13 @@ public class ResultsPDFExporter {
 	}
 
 	private void writeTableData(PdfPTable table) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(Locale.UK)
+				.withZone(ZoneId.systemDefault());
 		for (Test test : listTests) {
 			table.addCell(test.getId());
 			table.addCell(test.getUser());
-			table.addCell(test.getCreatedDate().toString());
-			table.addCell(test.getStartedDate().toString());
+			table.addCell(formatter.format(test.getCreatedDate()));
+			table.addCell(formatter.format(test.getStartedDate()));
 			table.addCell(test.getStatus());
 			table.addCell(String.valueOf(test.getResult()));
 		}

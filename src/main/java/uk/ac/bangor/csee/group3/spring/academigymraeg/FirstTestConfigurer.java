@@ -31,7 +31,7 @@ public class FirstTestConfigurer {
 	public void createFirstTest() {
 		if (testDetails.loadAllTests().size() < 1) {
 			Test firstTest = new Test();
-			firstTest.setQuestions(generateQuestions(1));
+			firstTest.setQuestions(generateQuestions(10));
 			firstTest.setId("1");
 			firstTest.setUser("admin");
 			firstTest.setCreatedDate(Instant.now());

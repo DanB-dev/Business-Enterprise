@@ -49,7 +49,7 @@ public class TestManagementController {
 	@Secured("ROLE_USER")
 	@GetMapping("/createTest")
 	public String createTest(Model model) {
-		List<Question> generatedTest = generateQuestions(3);
+		List<Question> generatedTest = generateQuestions(20);
 
 		model.addAttribute("generatedTest", generatedTest);
 		Test toSave = new Test();

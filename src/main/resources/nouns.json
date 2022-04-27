@@ -1,0 +1,152 @@
+[
+	{
+		"cyNoun": "Brechdan",
+		"enNoun": "Sandwhich",
+		"cyGender": "feminine"
+	},
+	{
+		"cyNoun": "Llawr",
+		"enNoun": "Floor",
+		"cyGender": "feminine"
+	},
+	{
+		"cyNoun": "Ty",
+		"enNoun": "House",
+		"cyGender": "feminine"
+	},
+	{
+		"cyNoun": "siaced",
+		"enNoun": "Jacket",
+		"cyGender": "feminine"
+	},
+	{
+		"cyNoun": "Room",
+		"enNoun": "To",
+		"cyGender": "feminine"
+	},
+	{
+		"cyNoun": "Llain",
+		"enNoun": "Towel",
+		"cyGender": "feminine"
+	},
+	{
+		"cyNoun": "Crys",
+		"enNoun": "Shirt",
+		"cyGender": "feminine"
+	},
+	{
+		"cyNoun": "Sanau",
+		"enNoun": "Socks",
+		"cyGender": "feminine"
+	},
+	{
+		"cyNoun": "Ffenestr",
+		"enNoun": "Window",
+		"cyGender": "feminine"
+	},
+	{
+		"cyNoun": "Llun",
+		"enNoun": "Picture",
+		"cyGender": "feminine"
+	},
+	{
+		"cyNoun": "Llyn",
+		"enNoun": "Lake",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Dyn",
+		"enNoun": "Man",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Mab",
+		"enNoun": "Son",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Tad",
+		"enNoun": "Father",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Tarw",
+		"enNoun": "Bull",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Brawd",
+		"enNoun": "Brother",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Ceffyl",
+		"enNoun": "Horse",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Ceiliog",
+		"enNoun": "Rooster",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Maharen",
+		"enNoun": "Ram",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Pen",
+		"enNoun": "Head",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Ci",
+		"enNoun": "Dog",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Afal",
+		"enNoun": "Apple",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Te",
+		"enNoun": "Tea",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Teledu",
+		"enNoun": "Television",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Beic",
+		"enNoun": "Bike",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Gliniadur",
+		"enNoun": "Laptop",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Cawell",
+		"enNoun": "Basket",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Llyfr",
+		"enNoun": "Book",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Bysellfwrdd",
+		"enNoun": "Keyboard",
+		"cyGender": "masculine"
+	},
+	{
+		"cyNoun": "Ty",
+		"enNoun": "House",
+		"cyGender": "masculine"
+	}
+]
