@@ -71,7 +71,7 @@ public class ResultsPDFExporter {
 
 		document.open();
 		Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-		font.setSize(15);
+		font.setSize(17);
 		Color academiBlue = new Color(13, 110, 253);
 		font.setColor(academiBlue);
 

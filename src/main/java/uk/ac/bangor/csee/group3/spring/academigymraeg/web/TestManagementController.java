@@ -183,7 +183,7 @@ public class TestManagementController {
 		return "result";
 	}
 	
-	
+	@Secured({ "ROLE_POWER", "ROLE_ADMIN" })
     @GetMapping("/results/export/pdf")
     public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
         response.setContentType("application/pdf");
@@ -193,12 +193,45 @@ public class TestManagementController {
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=results_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
-         
+        
+
+
         List<Test> listTests = (List<Test>) repository.findAll();
          
         ResultsPDFExporter exporter = new ResultsPDFExporter(listTests);
         exporter.export(response);
     }
+    
+	@Secured("ROLE_USER")
+    @GetMapping("/result/export/pdf")
+    public void exportOneToPDF(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+         
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=results_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+        
+		String userName = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails) principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+         
+        List<Test> listTests = (List<Test>) testDetails.loadAllTestsOfUser(userName);
+        
+         
+
+         
+        ResultsPDFExporter exporter = new ResultsPDFExporter(listTests);
+        exporter.export(response);
+    }
+    
+    
 
 	private List<Question> generateQuestions(int number) {
 		List<Noun> nouns = nounDetails.loadAllNouns();
