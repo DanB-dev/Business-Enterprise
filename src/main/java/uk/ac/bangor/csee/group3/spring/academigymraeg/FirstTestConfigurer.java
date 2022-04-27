@@ -28,9 +28,7 @@ public class FirstTestConfigurer {
 
 	@PostConstruct
 	public void createFirstTest() {
-		try {
-			testDetails.loadTestById("1");
-		} catch (TestNotFoundException e) {
+		if (testDetails.loadAllTests().size() < 1) {
 			Test firstTest = new Test();
 			firstTest.setQuestions(generateQuestions(1));
 			firstTest.setId("1");
@@ -41,14 +39,14 @@ public class FirstTestConfigurer {
 
 	private List<Question> generateQuestions(int number) {
 		List<Noun> nouns = nounDetails.loadAllNouns();
-		
-		if(nouns.size() < number) {
+
+		if (nouns.size() < number) {
 			throw new IllegalArgumentException("You have too few Nouns");
 		}
 
 		List<Question> q = new ArrayList<Question>();
 		List<Integer> used = new ArrayList<Integer>();
-		
+
 		for (int i = 0; i < number; i++) {
 
 			int rnd = new Random().nextInt(nouns.size());
@@ -70,16 +68,16 @@ public class FirstTestConfigurer {
 		int rnd = (int) Math.floor(Math.random() * 3);
 		switch (rnd) {
 		case 0:
-			finalQ.setQuestion("What is Welsh for " + noun.getEnNoun());
-			finalQ.setAnswer(noun.getCyNoun());
+			finalQ.setQuestion("What is the Welsh noun for " + noun.getEnNoun() + "?");
+			finalQ.setNoun(noun.getCyNoun());
 			break;
 		case 1:
-			finalQ.setQuestion("What is English for " + noun.getCyNoun());
-			finalQ.setAnswer(noun.getEnNoun());
+			finalQ.setQuestion("What is the English noun for " + noun.getCyNoun() + "?");
+			finalQ.setNoun(noun.getEnNoun());
 			break;
 		case 2:
-			finalQ.setQuestion("What is the gender of the welsh noun " + noun.getCyNoun());
-			finalQ.setAnswer(noun.getCyGender());
+			finalQ.setQuestion("What is the gender of the welsh noun " + noun.getCyNoun() + "?");
+			finalQ.setNoun(noun.getCyGender());
 			break;
 		default:
 			break;

@@ -24,14 +24,13 @@ public class Test {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 
-
 	@Embedded
 	@ElementCollection
 	private List<Question> questions;
 
 	@Column
 	private int result = 0;
-	
+
 	@Column(nullable = true)
 	private Instant startedDate;
 
@@ -40,7 +39,7 @@ public class Test {
 
 	@Column
 	private String user;
-	
+
 	public Instant getCreatedDate() {
 		return createdDate;
 	}
@@ -48,7 +47,6 @@ public class Test {
 	public String getId() {
 		return id;
 	}
-
 
 	public List<Question> getQuestions() {
 		return questions;
@@ -77,7 +75,6 @@ public class Test {
 	public void setId(String id) {
 		this.id = id;
 	}
-
 
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;

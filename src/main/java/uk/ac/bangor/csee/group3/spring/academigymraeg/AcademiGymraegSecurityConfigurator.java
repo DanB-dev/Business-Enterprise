@@ -21,35 +21,19 @@ public class AcademiGymraegSecurityConfigurator extends WebSecurityConfigurerAda
 	public PasswordEncoder passwordEncoder() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
-	
+
 	@Bean
 	public AuthenticationManager customAuthenticationManager() throws Exception {
-	    return authenticationManager();
+		return authenticationManager();
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests()
-		.antMatchers("/secure")
-		.hasRole("USER")
-		.antMatchers("/users")
-		.hasRole("ADMIN")
-		.antMatchers("/*")
-		.permitAll()
-		.anyRequest()
-		.authenticated()
-		.and()
-		.formLogin()
-		.loginPage("/login")
-		.defaultSuccessUrl("/secure")
-		.permitAll()
-		.and()
-		.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-		.and()
-		.userDetailsService(userDetailsService);
-		
+		http.authorizeRequests().antMatchers("/*").permitAll().anyRequest().authenticated().and().formLogin()
+				.loginPage("/login").defaultSuccessUrl("/secure").permitAll().and().logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")).and()
+				.userDetailsService(userDetailsService);
 
 	}
 
