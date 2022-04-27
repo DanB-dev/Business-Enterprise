@@ -2,6 +2,7 @@ package uk.ac.bangor.csee.group3.spring.academigymraeg.web;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import uk.ac.bangor.csee.group3.spring.academigymraeg.AnswersCreationDto;
 import uk.ac.bangor.csee.group3.spring.academigymraeg.RepositoryBasedNounImpl;
@@ -41,20 +43,12 @@ public class TestManagementController {
 
 	@GetMapping("/createTest")
 	public String createTest(Model model) {
-		List<Question> generatedTest = generateQuestions(2);
+		List<Question> generatedTest = generateQuestions(3);
 
 		model.addAttribute("generatedTest", generatedTest);
 		Test toSave = new Test();
 		toSave.setQuestions(generatedTest);
 		toSave.setCreatedDate(Instant.now());
-		Test saved = repository.save(toSave);
-		return "redirect:/taketest/" + saved.getId();
-	}
-	
-	@GetMapping("/taketest/{id}")
-	public String takeTest(@PathVariable("id") String id, Model model) {
-		Test toShow = testDetails.loadTestById(id);
-		List<Question> questions = toShow.getQuestions();
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -63,8 +57,17 @@ public class TestManagementController {
 		} else {
 			userName = principal.toString();
 		}
-		toShow.setUser(userName);
-		toShow.setStatus("started");
+		toSave.setUser(userName);
+		toSave.setStatus("started");
+		Test saved = repository.save(toSave);
+		return "redirect:/taketest/" + saved.getId();
+	}
+	
+	@GetMapping("/taketest/{id}")
+	public String takeTest(@PathVariable("id") String id, Model model) {
+		Test toShow = testDetails.loadTestById(id);
+		List<Question> questions = toShow.getQuestions();
+
 		if(toShow.getStartedDate() == null) {
 			toShow.setStartedDate(Instant.now());
 		}
@@ -76,10 +79,10 @@ public class TestManagementController {
 			Question q = new Question();
 			q.setQuestion(questions.get(i).getQuestion());
 			q.setNoun(questions.get(i).getNoun());
+			q.setAnswer(questions.get(i).getAnswer());
 			testForm.addAnswer(q);
 		}
-		
-				
+		testForm.setId(id);
 		model.addAttribute("toShow", toShow);
 		model.addAttribute("questions", questions);
 		model.addAttribute("form",testForm);
@@ -103,18 +106,45 @@ public class TestManagementController {
 		return "test";
 	}
 	
-	@PostMapping("/submittest")
-	public String submitTest(@ModelAttribute AnswersCreationDto form, Model model) {
+	
+	// Allow users to save the test. They can come back any time and change answers.
+	@RequestMapping(value="/savetest", method=RequestMethod.POST,params="action=save")
+	public String saveTest(@ModelAttribute AnswersCreationDto form, Model model) {
+		Test toMark = testDetails.loadTestById(form.getId());
+		List<Question> questions = toMark.getQuestions();
 		
+		for (int i = 0; i < questions.size(); i++) {
+			List<Question> answers = form.getAnswers();
+			questions.get(i).setAnswer(answers.get(i).getAnswer());
+		}
+		repository.save(toMark);
+		return "redirect:/taketest/" + form.getId();
+	}
+	
+	//Submit Test. Users Who Submit won't be able to change answers.
+	@RequestMapping(value="/savetest", method=RequestMethod.POST,params="action=submit")
+	public String submitTest(@ModelAttribute AnswersCreationDto form, Model model) {
+		Test toMark = testDetails.loadTestById(form.getId());
+		List<Question> questions = toMark.getQuestions();
 		int total = 0;
-		for (Question answer: form.getAnswers()) {
-			if(answer.getAnswer().equalsIgnoreCase(answer.getNoun())) {
-				answer.setIsCorrect(true);
+		
+		for (int i = 0; i < questions.size(); i++) {
+			List<Question> answers = form.getAnswers();
+			questions.get(i).setAnswer(answers.get(i).getAnswer());
+			answers.get(i).setQuestion(questions.get(i).getQuestion());
+			answers.get(i).setNoun(questions.get(i).getNoun());
+			if (answers.get(i).getAnswer().equalsIgnoreCase(questions.get(i).getNoun())) {
+				answers.get(i).setIsCorrect(true);
 				total++;
 			}else {
-				answer.setIsCorrect(false);
+				answers.get(i).setIsCorrect(false);
 			}
 		}
+		
+		//Implement Save here
+		toMark.setResult(total);
+		toMark.setStatus("Submitted");
+		repository.save(toMark);
 		
 		model.addAttribute("form", form);
 		model.addAttribute("total",total);

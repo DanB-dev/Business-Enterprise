@@ -1,80 +1,88 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<title>Edit Noun</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<title>Edit Noun</title>
 </head>
 <body>
-	  <div class="container">
-	            <nav class="navbar navbar-expand-md navbar-light">
-	                <div class="navbar-brand">Academi Gymraeg</div>
-	                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu" aria-controls="toggleMobileMenu" aria-expanded="false" aria-label="Toggle navigation">
-	                    <span class="navbar-toggler-icon"></span>
-	                </button>
-	                <div class="collapse navbar-collapse" id="toggleMobileMenu">
-	                    <ul class="navbar-nav text-center">
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="/welcome">Home</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="/login">Login</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="/tests">Take Test</a>
-	                        </li>
-	                        <!--dropdown-->
-	                        <li class="nav-item dropdown">
-	                            <div class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Users</div>
-	                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-	                                <li>
-	                                    <a class="dropdown-item" href="/users">View Users</a>
-	                                </li>
-	                                <li>
-	                                    <a class="dropdown-item" href="/register">Register New User</a>
-	                                </li>
-	                            </ul>
-	                        </li>
-	                        <!--dropdown-->
-	                        <li class="nav-item dropdown">
-	                            <div class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Nouns</div>
-	                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-	                                <li>
-	                                    <a class="dropdown-item" href="/nouns">View Nouns</a>
-	                                </li>
-	                                <li>
-	                                    <a class="dropdown-item" href="/createNoun">Add Noun</a>
-	                                </li>
-	                            </ul>
-	                        </li>
-	                    </ul>
-	                </div>
-	            </nav>
-	       </div>
+	<div class="container">
+		<nav class="navbar navbar-expand-md navbar-light">
+			<div class="navbar-brand">Academi Gymraeg</div>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu"
+				aria-controls="toggleMobileMenu" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="toggleMobileMenu">
+				<ul class="navbar-nav text-center">
+					<li class="nav-item"><a class="nav-link" href="/welcome">Home</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/login">Login</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/tests">Take
+							Test</a></li>
+					<!--dropdown-->
+					<li class="nav-item dropdown">
+						<div class="nav-link dropdown-toggle" id="navbarDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">Users</div>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/users">View Users</a></li>
+							<li><a class="dropdown-item" href="/register">Register
+									New User</a></li>
+						</ul>
+					</li>
+					<!--dropdown-->
+					<li class="nav-item dropdown">
+						<div class="nav-link dropdown-toggle active" id="navbarDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">Nouns</div>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/nouns">View Nouns</a></li>
+							<li><a class="dropdown-item" href="/createNoun">Add Noun</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
 
-    <div class="container-fluid p-5 bg-primary text-white text-center">
-        <h1>Edit Noun</h1>
-    </div>
+	<div class="container-fluid p-5 bg-primary text-white text-center">
+		<h1>Edit Noun</h1>
+	</div>
 
-	<div class= "container text-center">
+	<div class="container-md mt-4 w-25 ">
 		<form th:action="@{/saveNoun}" th:object="${noun}" method="post">
-            <div class="m-3">
-                <div class="form-group row">
-                    <label>Welsh Noun <input class="form-control" type="text" th:field="*{cyNoun}"></label>
-                </div>
-                <div class="form-group row">
-                    <label>English Noun <input class="form-control" type="text" th:field="*{enNoun}"></label>
-                </div>
-            </div>
-            <label th:for="masc"> Masculine</label>
-            <input type="radio" name="cyGender" value="masculine" th:id="masc" >
-                <label th:for="fem"> Feminine</label> 
-                <input type="radio"name="cyGender" value="feminine" th:id="fem">
-            <div>
-			    <button class="btn btn-primary" type="submit">Save</button>
-            </div>
+			<div class="mb-3">
+				<label class="form-label" th:for="cyNoun">Welsh Noun </label><input
+					class="form-control" th:id="cyNoun" type="text" th:field="*{cyNoun}">
+			</div>
+			<div class="mb-3">
+				<label class="form-label" th:for="enNoun">English Noun </label><input class="form-control" type="text"
+					th:field="*{enNoun}" th:id="enNoun">
+			</div>
+
+			<div class="form-check">
+				<input type="radio" name="cyGender" value="masculine" th:id="masc"
+				th:checked="${noun.cyGender == 'masculine'}"
+					class="form-check-input"><label th:for="masc"
+					class="form-check-label">Masculine</label>
+			</div>
+			<div class="form-check">
+				<input type="radio" name="cyGender" value="feminine" th:id="fem"
+				th:checked="${noun.cyGender == 'feminine'}"
+					class="form-check-input"><label th:for="fem"
+					class="form-check-label">Feminine</label>
+			</div>
+			<div class="text-center">
+				<button class="btn btn-primary mt-2" type="submit">Save</button>
+			</div>
 		</form>
 	</div>
 </body>
