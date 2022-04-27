@@ -77,7 +77,6 @@
 			<div class="text-center">
 				<button class="btn btn-secondary mt-2" onclick='genPassword()'
 					type="button">Generate Password</button>
-
 			</div>
 			<hr />
 			<div class="form-check w-25 mx-auto">
@@ -97,6 +96,7 @@
 			</div>
 			<hr />
 			<div class="text-center">
+				<input type="hidden" th:field="*{id}"/>
 				<button class="btn btn-primary mt-2" type="submit">Save</button>
 			</div>
 

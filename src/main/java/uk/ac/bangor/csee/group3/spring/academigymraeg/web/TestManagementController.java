@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -49,6 +50,8 @@ public class TestManagementController {
 		Test toSave = new Test();
 		toSave.setQuestions(generatedTest);
 		toSave.setCreatedDate(Instant.now());
+		
+		
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -58,6 +61,8 @@ public class TestManagementController {
 			userName = principal.toString();
 		}
 		toSave.setUser(userName);
+		
+		
 		toSave.setStatus("started");
 		Test saved = repository.save(toSave);
 		return "redirect:/taketest/" + saved.getId();
@@ -93,8 +98,27 @@ public class TestManagementController {
 	public String showTests(Model model) {
 		List<Test> loadedTests = testDetails.loadAllTests();
 		model.addAttribute("loadedTests", loadedTests);
-
+		
 		return "tests";
+	}
+	
+	@RequestMapping("/usertests")
+	public String showUserTests(Model model) {
+		
+		String userName = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails) principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+
+		
+		List<Test> loadedTests = testDetails.loadAllTestsOfUser(userName);
+		model.addAttribute("loadedTests",loadedTests);
+		
+		return "usertests";
 	}
 
 	@GetMapping("/test/{id}")
@@ -121,6 +145,7 @@ public class TestManagementController {
 		return "redirect:/taketest/" + form.getId();
 	}
 	
+	
 	//Submit Test. Users Who Submit won't be able to change answers.
 	@RequestMapping(value="/savetest", method=RequestMethod.POST,params="action=submit")
 	public String submitTest(@ModelAttribute AnswersCreationDto form, Model model) {
@@ -134,9 +159,11 @@ public class TestManagementController {
 			answers.get(i).setQuestion(questions.get(i).getQuestion());
 			answers.get(i).setNoun(questions.get(i).getNoun());
 			if (answers.get(i).getAnswer().equalsIgnoreCase(questions.get(i).getNoun())) {
+				questions.get(i).setIsCorrect(true);
 				answers.get(i).setIsCorrect(true);
 				total++;
 			}else {
+				questions.get(i).setIsCorrect(false);
 				answers.get(i).setIsCorrect(false);
 			}
 		}

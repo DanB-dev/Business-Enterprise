@@ -16,29 +16,35 @@ public class RepositoryBasedUserDetailsServiceImpl implements UserDetailsService
 
 	@Autowired
 	private UserRepository repository;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<User> u = repository.findById(username);
-		
-		if(u.isPresent())
+		Optional<User> u = repository.findByUsername(username);
+
+		if (u.isPresent())
 			return u.get();
 		throw new UsernameNotFoundException(username + "not found");
 	}
-	
-	
+
+	public UserDetails loadUserById(String id) {
+		Optional<User> u = repository.findById(id);
+		if (u.isPresent())
+			return u.get();
+		return null;
+	}
+
 	public boolean isUserAlreadyPresent(User user) {
 		Optional<User> u = repository.findById(user.getUsername());
-		if(u.isPresent())
+		if (u.isPresent())
 			return true;
 		else
 			return false;
 	}
-	
+
 	public void deleteUserByUsername(String username) {
 		Optional<User> u = repository.findById(username);
-		
-		if(u.isPresent())
+
+		if (u.isPresent())
 			repository.deleteById(username);
 		throw new UsernameNotFoundException(username + "not found");
 	}

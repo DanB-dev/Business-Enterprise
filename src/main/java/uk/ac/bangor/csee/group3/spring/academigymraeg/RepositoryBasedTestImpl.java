@@ -27,4 +27,8 @@ public class RepositoryBasedTestImpl {
 	public List<Test> loadAllTests(){
 		return (List<Test>) repository.findAll();
 	}
+	
+	public List<Test> loadAllTestsOfUser(String user){
+		return  repository.findAllByUser(user);
+	}
 }

@@ -25,8 +25,18 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="/login">Login</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="/tests">Take
-							Test</a></li>
+					<li class="nav-item dropdown">
+						<div class="nav-link dropdown-toggle" id="navbarDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">Tests</div>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/usertests">View My
+									Tests</a></li>
+							<li><a class="dropdown-item" href="/tests">View All
+									Tests</a></li>
+							<li><a class="dropdown-item" href="/createTest">Take
+									Test</a></li>
+						</ul>
+					</li>
 					<!--dropdown-->
 					<li class="nav-item dropdown">
 						<div class="nav-link dropdown-toggle active" id="navbarDropdown"
@@ -74,7 +84,7 @@
 				<button class="btn btn-secondary mt-2" onclick='genPassword()'
 					type="button">Generate Password</button>
 			</div>
-			<hr/>
+			<hr />
 			<button type="submit" class="btn btn-primary">Create User</button>
 		</form>
 		<script>

@@ -6,10 +6,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,11 +25,15 @@ public class User implements UserDetails {
 	@Column(nullable = false)
 	private boolean admin = false, user = true, power = false;
 
-	@NotNull(message="Password is required")
+	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	private String id;
+
+	@NotNull(message = "Password is required")
 	private String password;
 
-	@Id
-	@NotNull(message="Username is required")
+	@NotNull(message = "Username is required")
 	private String username;
 
 	@Transient
@@ -45,6 +51,15 @@ public class User implements UserDetails {
 			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
 		return authorities;
+	}
+
+	public boolean getEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	public String getPassword() {
@@ -74,7 +89,8 @@ public class User implements UserDetails {
 		return true;
 	}
 
-	public boolean getEnabled() {
+	@Override
+	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
 	}
@@ -91,6 +107,10 @@ public class User implements UserDetails {
 		this.admin = admin;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -105,12 +125,6 @@ public class User implements UserDetails {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
 	}
 
 }

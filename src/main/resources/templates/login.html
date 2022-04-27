@@ -25,8 +25,18 @@
 					</li>
 					<li class="nav-item"><a class="nav-link active" href="/login">Login</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="/createTest">Take
-							Test</a></li>
+					<li class="nav-item dropdown">
+						<div class="nav-link dropdown-toggle" id="navbarDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">Tests</div>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/usertests">View My
+									Tests</a></li>
+							<li><a class="dropdown-item" href="/tests">View All
+									Tests</a></li>
+							<li><a class="dropdown-item" href="/createTest">Take
+									Test</a></li>
+						</ul>
+					</li>
 					<!--dropdown-->
 					<li class="nav-item dropdown">
 						<div class="nav-link dropdown-toggle" id="navbarDropdown"
@@ -56,7 +66,8 @@
 		<h1>The Login Page!</h1>
 	</div>
 	<div class="container text-center mt-5">
-		<div th:if="${errorUsername}">That Username was incorrect!</div>
+		<div th:if="${param.error}">Invalid username OR password.</div>
+		<div th:if="${param.logout}">You have been logged out.</div>
 		<form th:action="@{/login}" method="post" class="w-50 mx-auto">
 
 			<div class="m-3 form-group row">
@@ -68,7 +79,8 @@
 			<div class="m-3 form-group row">
 				<label class="col-4 col-form-label">Password: </label>
 				<div class="col-8">
-					<input type="password" name="password" class="form-control" />
+					<input required type="password" name="password"
+						class="form-control" />
 				</div>
 			</div>
 

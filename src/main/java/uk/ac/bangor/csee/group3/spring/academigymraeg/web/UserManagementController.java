@@ -1,9 +1,11 @@
 package uk.ac.bangor.csee.group3.spring.academigymraeg.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,45 +21,50 @@ import uk.ac.bangor.csee.group3.spring.academigymraeg.repository.UserRepository;
 @Controller
 @Secured("ROLE_ADMIN")
 public class UserManagementController {
-	
+
 	@Autowired
 	private UserRepository repository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private RepositoryBasedUserDetailsServiceImpl userDetailsService;
-	
+
 	@RequestMapping("/users")
 	public String showUserList(Model model) {
 		List<User> listUsers = (List<User>) repository.findAll();
 		model.addAttribute("listUsers", listUsers);
-		
+
 		return "users";
 	}
-	
+
 	@PostMapping("/deleteUser")
 	public String deleteUser(@RequestParam String user) {
 		repository.deleteById(user);
-		
+
 		return "redirect:/users";
 	}
-	
+
 	@RequestMapping("/editUser")
-	public String editUser(String username, Model model) {
-		User user = (User) userDetailsService.loadUserByUsername(username);
+	public String editUser(String id, Model model) {
+		User user =  (User) userDetailsService.loadUserById(id);
 		model.addAttribute("user", user);
-		
-		
+
 		return "editUser";
 	}
-	
+
 	@PostMapping("/saveUser")
 	public String saveUser(@ModelAttribute User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		repository.save(user);
+
+		if (!user.getPassword().isEmpty()) {
+			repository.updateDetailsWithPassword(user.getUsername(), user.isAdmin(), user.isPower(), user.isUser(),passwordEncoder.encode(user.getPassword()),user.getId());
+		} else {
+			repository.updateDetailsWithoutPassword(user.getUsername(), user.isAdmin(), user.isPower(), user.isUser(),user.getId());
+		}
 		
+		
+
 		return "redirect:/users";
 	}
-		
+
 }
