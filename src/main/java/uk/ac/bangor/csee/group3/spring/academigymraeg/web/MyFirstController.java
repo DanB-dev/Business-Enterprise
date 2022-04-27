@@ -2,7 +2,6 @@ package uk.ac.bangor.csee.group3.spring.academigymraeg.web;
 
 import java.util.Date;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -24,13 +23,13 @@ public class MyFirstController {
 		} else {
 			userName = principal.toString();
 		}
-		
+
 		if (!userName.equals("anonymousUser")) {
 			loggedIn = true;
 		}
 
 		model.addAttribute("loggedIn", loggedIn);
-		model.addAttribute("username",userName);
+		model.addAttribute("username", userName);
 		model.addAttribute("date", new Date());
 		return "welcome";
 	}

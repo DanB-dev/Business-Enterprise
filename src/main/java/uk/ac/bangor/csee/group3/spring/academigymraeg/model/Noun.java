@@ -13,20 +13,16 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class Noun {
 	@Column(nullable = false)
-	private String cyGender,enNoun;
-	
-	
+	private String cyGender, enNoun;
+
 	@NotNull(message = "You must enter a noun")
 	@Column(nullable = false)
 	private String cyNoun; // Welsh Noun
-	
-	
+
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-
-
 
 	public String getCyGender() {
 		return cyGender;
@@ -40,8 +36,6 @@ public class Noun {
 		return enNoun;
 	}
 
-
-
 	public String getId() {
 		return id;
 	}
@@ -53,8 +47,6 @@ public class Noun {
 	public void setCyNoun(String cyNoun) {
 		this.cyNoun = cyNoun;
 	}
-
-
 
 	public void setEnNoun(String enNoun) {
 		this.enNoun = enNoun;

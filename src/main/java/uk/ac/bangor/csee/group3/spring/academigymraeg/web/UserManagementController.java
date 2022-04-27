@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import uk.ac.bangor.csee.group3.spring.academigymraeg.RepositoryBasedUserDetailsServiceImpl;
@@ -47,23 +48,27 @@ public class UserManagementController {
 
 	@RequestMapping("/editUser")
 	public String editUser(String id, Model model) {
-		User user =  (User) userDetailsService.loadUserById(id);
+		User user = (User) userDetailsService.loadUserById(id);
 		model.addAttribute("user", user);
 
 		return "editUser";
 	}
 
-	@PostMapping("/saveUser")
-	public String saveUser(@ModelAttribute User user) {
-
+	@RequestMapping(value = "/saveUser", method = RequestMethod.POST, params = "action=update")
+	public String updateUser(@ModelAttribute User user) {
 		if (!user.getPassword().isEmpty()) {
-			repository.updateDetailsWithPassword(user.getUsername(), user.isAdmin(), user.isPower(), user.isUser(),passwordEncoder.encode(user.getPassword()),user.getId());
+			repository.updateDetailsWithPassword(user.getUsername(), user.isAdmin(), user.isPower(), user.isUser(),
+					passwordEncoder.encode(user.getPassword()), user.getId());
 		} else {
-			repository.updateDetailsWithoutPassword(user.getUsername(), user.isAdmin(), user.isPower(), user.isUser(),user.getId());
+			repository.updateDetailsWithoutPassword(user.getUsername(), user.isAdmin(), user.isPower(), user.isUser(),
+					user.getId());
 		}
-		
-		
+		return "redirect:/users";
+	}
 
+	@RequestMapping(value = "/saveUser", method = RequestMethod.POST, params = "action=create")
+	public String createUser(@ModelAttribute User user) {
+		repository.save(user);
 		return "redirect:/users";
 	}
 

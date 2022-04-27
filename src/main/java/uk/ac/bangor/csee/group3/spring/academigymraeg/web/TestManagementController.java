@@ -33,11 +33,10 @@ public class TestManagementController {
 
 	@Autowired
 	private TestRepository repository;
-	
 
 	@Autowired
 	private RepositoryBasedTestImpl testDetails;
-	
+
 	@Secured("ROLE_USER")
 	@GetMapping("/createTest")
 	public String createTest(Model model) {
@@ -47,8 +46,7 @@ public class TestManagementController {
 		Test toSave = new Test();
 		toSave.setQuestions(generatedTest);
 		toSave.setCreatedDate(Instant.now());
-		
-		
+
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -58,27 +56,25 @@ public class TestManagementController {
 			userName = principal.toString();
 		}
 		toSave.setUser(userName);
-		
-		
+
 		toSave.setStatus("started");
 		Test saved = repository.save(toSave);
 		return "redirect:/taketest/" + saved.getId();
 	}
-	
+
 	@Secured("ROLE_USER")
 	@GetMapping("/taketest/{id}")
 	public String takeTest(@PathVariable("id") String id, Model model) {
 		Test toShow = testDetails.loadTestById(id);
 		List<Question> questions = toShow.getQuestions();
 
-		if(toShow.getStartedDate() == null) {
+		if (toShow.getStartedDate() == null) {
 			toShow.setStartedDate(Instant.now());
 		}
 		repository.save(toShow);
-		
-		
+
 		AnswersCreationDto testForm = new AnswersCreationDto();
-		for (int i=0; i < questions.size(); i++) {
+		for (int i = 0; i < questions.size(); i++) {
 			Question q = new Question();
 			q.setQuestion(questions.get(i).getQuestion());
 			q.setNoun(questions.get(i).getNoun());
@@ -88,23 +84,23 @@ public class TestManagementController {
 		testForm.setId(id);
 		model.addAttribute("toShow", toShow);
 		model.addAttribute("questions", questions);
-		model.addAttribute("form",testForm);
+		model.addAttribute("form", testForm);
 		return "taketest";
 	}
-	
-	@Secured({"ROLE_POWER","ROLE_ADMIN"})
+
+	@Secured({ "ROLE_POWER", "ROLE_ADMIN" })
 	@RequestMapping("/tests")
 	public String showTests(Model model) {
 		List<Test> loadedTests = testDetails.loadAllTests();
 		model.addAttribute("loadedTests", loadedTests);
-		
+
 		return "tests";
 	}
-	
+
 	@Secured("ROLE_USER")
 	@RequestMapping("/usertests")
 	public String showUserTests(Model model) {
-		
+
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -114,14 +110,13 @@ public class TestManagementController {
 			userName = principal.toString();
 		}
 
-		
 		List<Test> loadedTests = testDetails.loadAllTestsOfUser(userName);
-		model.addAttribute("loadedTests",loadedTests);
-		
+		model.addAttribute("loadedTests", loadedTests);
+
 		return "usertests";
 	}
-	
-	@Secured({"ROLE_POWER","ROLE_ADMIN"})
+
+	@Secured({ "ROLE_POWER", "ROLE_ADMIN" })
 	@GetMapping("/test/{id}")
 	public String showTest(@PathVariable("id") String id, Model model) {
 		Test toShow = testDetails.loadTestById(id);
@@ -130,15 +125,14 @@ public class TestManagementController {
 		model.addAttribute("questions", questions);
 		return "test";
 	}
-	
-	
+
 	// Allow users to save the test. They can come back any time and change answers.
 	@Secured("ROLE_USER")
-	@RequestMapping(value="/savetest", method=RequestMethod.POST,params="action=save")
+	@RequestMapping(value = "/savetest", method = RequestMethod.POST, params = "action=save")
 	public String saveTest(@ModelAttribute AnswersCreationDto form, Model model) {
 		Test toMark = testDetails.loadTestById(form.getId());
 		List<Question> questions = toMark.getQuestions();
-		
+
 		for (int i = 0; i < questions.size(); i++) {
 			List<Question> answers = form.getAnswers();
 			questions.get(i).setAnswer(answers.get(i).getAnswer());
@@ -146,16 +140,15 @@ public class TestManagementController {
 		repository.save(toMark);
 		return "redirect:/taketest/" + form.getId();
 	}
-	
-	
-	//Submit Test. Users Who Submit won't be able to change answers.
+
+	// Submit Test. Users Who Submit won't be able to change answers.
 	@Secured("ROLE_USER")
-	@RequestMapping(value="/savetest", method=RequestMethod.POST,params="action=submit")
+	@RequestMapping(value = "/savetest", method = RequestMethod.POST, params = "action=submit")
 	public String submitTest(@ModelAttribute AnswersCreationDto form, Model model) {
 		Test toMark = testDetails.loadTestById(form.getId());
 		List<Question> questions = toMark.getQuestions();
 		int total = 0;
-		
+
 		for (int i = 0; i < questions.size(); i++) {
 			List<Question> answers = form.getAnswers();
 			questions.get(i).setAnswer(answers.get(i).getAnswer());
@@ -165,25 +158,21 @@ public class TestManagementController {
 				questions.get(i).setIsCorrect(true);
 				answers.get(i).setIsCorrect(true);
 				total++;
-			}else {
+			} else {
 				questions.get(i).setIsCorrect(false);
 				answers.get(i).setIsCorrect(false);
 			}
 		}
-		
-		//Implement Save here
+
+		// Implement Save here
 		toMark.setResult(total);
 		toMark.setStatus("Submitted");
 		repository.save(toMark);
-		
+
 		model.addAttribute("form", form);
-		model.addAttribute("total",total);
+		model.addAttribute("total", total);
 		return "result";
 	}
-	
-	
-	
-	
 
 	private List<Question> generateQuestions(int number) {
 		List<Noun> nouns = nounDetails.loadAllNouns();
@@ -216,15 +205,15 @@ public class TestManagementController {
 		int rnd = (int) Math.floor(Math.random() * 3);
 		switch (rnd) {
 		case 0:
-			finalQ.setQuestion("What is the Welsh noun for " + noun.getEnNoun()+"?");
+			finalQ.setQuestion("What is the Welsh noun for " + noun.getEnNoun() + "?");
 			finalQ.setNoun(noun.getCyNoun());
 			break;
 		case 1:
-			finalQ.setQuestion("What is the English noun for " + noun.getCyNoun()+"?");
+			finalQ.setQuestion("What is the English noun for " + noun.getCyNoun() + "?");
 			finalQ.setNoun(noun.getEnNoun());
 			break;
 		case 2:
-			finalQ.setQuestion("What is the gender of the welsh noun " + noun.getCyNoun()+"?");
+			finalQ.setQuestion("What is the gender of the welsh noun " + noun.getCyNoun() + "?");
 			finalQ.setNoun(noun.getCyGender());
 			break;
 		default:

@@ -28,13 +28,13 @@ public class FirstTestConfigurer {
 
 	@PostConstruct
 	public void createFirstTest() {
-			if(testDetails.loadAllTests().size() < 1) {
-				Test firstTest = new Test();
-				firstTest.setQuestions(generateQuestions(1));
-				firstTest.setId("1");
-				firstTest.setUser("admin");
-				repository.save(firstTest);
-			}
+		if (testDetails.loadAllTests().size() < 1) {
+			Test firstTest = new Test();
+			firstTest.setQuestions(generateQuestions(1));
+			firstTest.setId("1");
+			firstTest.setUser("admin");
+			repository.save(firstTest);
+		}
 	}
 
 	private List<Question> generateQuestions(int number) {
@@ -68,15 +68,15 @@ public class FirstTestConfigurer {
 		int rnd = (int) Math.floor(Math.random() * 3);
 		switch (rnd) {
 		case 0:
-			finalQ.setQuestion("What is the Welsh noun for " + noun.getEnNoun()+"?");
+			finalQ.setQuestion("What is the Welsh noun for " + noun.getEnNoun() + "?");
 			finalQ.setNoun(noun.getCyNoun());
 			break;
 		case 1:
-			finalQ.setQuestion("What is the English noun for " + noun.getCyNoun()+"?");
+			finalQ.setQuestion("What is the English noun for " + noun.getCyNoun() + "?");
 			finalQ.setNoun(noun.getEnNoun());
 			break;
 		case 2:
-			finalQ.setQuestion("What is the gender of the welsh noun " + noun.getCyNoun()+"?");
+			finalQ.setQuestion("What is the gender of the welsh noun " + noun.getCyNoun() + "?");
 			finalQ.setNoun(noun.getCyGender());
 			break;
 		default:

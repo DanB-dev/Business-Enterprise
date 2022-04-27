@@ -13,11 +13,12 @@ import uk.ac.bangor.csee.group3.spring.academigymraeg.model.Noun;
 import uk.ac.bangor.csee.group3.spring.academigymraeg.model.User;
 
 public interface NounRepository extends JpaSpecificationExecutor<Noun>, CrudRepository<Noun, String> {
-	
+
 	@Transactional
 	@Modifying
 	@Query("update Noun n set n.cyNoun = :cyNoun, n.enNoun = :enNoun, n.cyGender= :cyGender where n.id = :id")
-	void updateNoun(@Param("cyNoun") String cyNoun, @Param("enNoun") String enNoun, @Param("cyGender") String cyGender,  @Param("id") String id);
-	
+	void updateNoun(@Param("cyNoun") String cyNoun, @Param("enNoun") String enNoun, @Param("cyGender") String cyGender,
+			@Param("id") String id);
+
 	Optional<Noun> findByCyNoun(String cyNoun);
 }

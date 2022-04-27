@@ -10,13 +10,13 @@ import uk.ac.bangor.csee.group3.spring.academigymraeg.repository.NounRepository;
 
 @Component
 public class FirstNounConfigurer {
-	
+
 	@Autowired
 	private NounRepository repository;
-	
+
 	@Autowired
 	private RepositoryBasedNounImpl nounDetails;
-	
+
 	@PostConstruct
 	public void createFirstNoun() {
 		try {
@@ -30,5 +30,5 @@ public class FirstNounConfigurer {
 			repository.save(firstNoun);
 		}
 	}
-	
+
 }

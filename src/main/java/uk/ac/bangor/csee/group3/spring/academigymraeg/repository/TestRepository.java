@@ -8,5 +8,5 @@ import org.springframework.data.repository.CrudRepository;
 import uk.ac.bangor.csee.group3.spring.academigymraeg.model.Test;
 
 public interface TestRepository extends JpaSpecificationExecutor<Test>, CrudRepository<Test, String> {
-	 List<Test> findAllByUser(String user);
+	List<Test> findAllByUser(String user);
 }

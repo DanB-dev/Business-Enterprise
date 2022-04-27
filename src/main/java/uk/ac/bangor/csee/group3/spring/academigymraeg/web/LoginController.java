@@ -18,21 +18,18 @@ public class LoginController {
 		}
 		return "redirect:/secure";
 	}
-	
+
 	@RequestMapping("/logout")
 	public String logout(SessionStatus session) {
 		SecurityContextHolder.getContext().setAuthentication(null);
 		session.setComplete();
-		
+
 		return "redirect:/login";
 	}
-	
+
 	@RequestMapping("/secure")
 	public String showSecurePage() {
 		return "redirect:/welcome";
 	}
-	
-	
-	
 
 }

@@ -12,23 +12,23 @@ import uk.ac.bangor.csee.group3.spring.academigymraeg.repository.TestRepository;
 
 @Component
 public class RepositoryBasedTestImpl {
-	
+
 	@Autowired
 	private TestRepository repository;
-	
-	public Test loadTestById(String id) throws TestNotFoundException{
+
+	public Test loadTestById(String id) throws TestNotFoundException {
 		Optional<Test> t = repository.findById(id);
-		
-		if(t.isPresent())
+
+		if (t.isPresent())
 			return t.get();
 		throw new TestNotFoundException(id + "not found");
 	}
-	
-	public List<Test> loadAllTests(){
+
+	public List<Test> loadAllTests() {
 		return (List<Test>) repository.findAll();
 	}
-	
-	public List<Test> loadAllTestsOfUser(String user){
-		return  repository.findAllByUser(user);
+
+	public List<Test> loadAllTestsOfUser(String user) {
+		return repository.findAllByUser(user);
 	}
 }
